@@ -1,0 +1,177 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import heroImage from '../assets/images/hero.png';
+---
+
+<Layout title="WasiBonsai | El arte del hogar miniatura">
+	<main class="min-h-screen">
+		<!-- Navigation -->
+		<nav class="fixed top-0 w-full z-50 px-6 py-4 flex justify-between items-center backdrop-blur-md bg-slate-950/20 border-b border-white/5">
+			<div class="text-2xl font-bold flex items-center gap-2">
+				<span class="text-secondary tracking-tighter">Wasi</span><span class="text-white font-light">Bonsai</span>
+			</div>
+			<div class="hidden md:flex gap-8 text-sm font-medium items-center tracking-wide uppercase">
+				<a href="#inicio" class="hover:text-secondary transition-colors duration-300">Inicio</a>
+				<a href="#coleccion" class="hover:text-secondary transition-colors duration-300">Colección</a>
+				<a href="#servicios" class="hover:text-secondary transition-colors duration-300">Servicios</a>
+				<a href="#contacto" class="hover:text-secondary transition-colors duration-300">Contacto</a>
+				<button class="bg-secondary text-primary px-6 py-2 rounded-full font-bold hover:scale-105 transition-transform duration-300">Ver Catálogo</button>
+			</div>
+		</nav>
+
+		<!-- Hero Section -->
+		<section id="inicio" class="relative min-h-[90vh] flex items-center pt-20">
+			<div class="absolute inset-0 z-0">
+				<Image 
+					src={heroImage} 
+					alt="Beautiful Bonsai tree in a dark setting" 
+					class="w-full h-full object-cover opacity-60"
+				/>
+				<div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/80 to-transparent"></div>
+			</div>
+			
+			<div class="container mx-auto px-6 relative z-10">
+				<div class="max-w-2xl fade-in">
+					<h1 class="text-5xl md:text-7xl font-bold leading-tight mb-6">
+						Cultiva la <br/>
+						<span class="text-secondary italic">Serenidad</span> <br/>
+						en tu hogar
+					</h1>
+					<p class="text-lg md:text-xl text-slate-300 mb-10 max-w-lg leading-relaxed">
+						En WasiBonsai combinamos la tradición milenaria oriental con el diseño de interiores moderno para traerte naturaleza viva en miniatura.
+					</p>
+					<div class="flex gap-4">
+						<a href="#coleccion" class="bg-secondary text-primary px-10 py-4 font-bold rounded-lg hover:shadow-xl hover:shadow-secondary/20 transition-all duration-300">Empezar Ahora</a>
+						<a href="#" class="border border-white/20 px-10 py-4 font-bold rounded-lg hover:bg-white/10 transition-all duration-300">Ver Historia</a>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Collections Section -->
+		<section id="coleccion" class="py-24 bg-slate-950">
+			<div class="container mx-auto px-6">
+				<div class="text-center mb-16">
+					<span class="text-secondary font-bold uppercase tracking-widest text-sm mb-4 block">Nuestra Selección</span>
+					<h2 class="text-4xl md:text-6xl font-bold">Inspiración Natural</h2>
+				</div>
+
+				<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+					<!-- Card 1 -->
+					<div class="group relative overflow-hidden rounded-2xl bg-white/5 border border-white/10 hover:border-secondary/50 p-4 transition-all duration-500">
+						<div class="h-64 rounded-xl overflow-hidden mb-6 relative">
+							<div class="absolute inset-0 bg-primary/20 group-hover:bg-transparent transition-colors duration-500"></div>
+							<div class="w-full h-full bg-emerald-900/50 flex items-center justify-center">
+								<span class="text-secondary/30 italic text-5xl font-serif">Arce</span>
+							</div>
+						</div>
+						<h3 class="text-2xl font-bold mb-2">Arce Rojo</h3>
+						<p class="text-slate-400 mb-6">Colores vibrantes que cambian con las estaciones, un espectáculo vivo.</p>
+						<div class="flex justify-between items-center">
+							<span class="text-secondary font-bold">$120.00</span>
+							<button class="text-white hover:text-secondary transition-colors underline decoration-secondary">Detalles</button>
+						</div>
+					</div>
+
+					<!-- Card 2 -->
+					<div class="group relative overflow-hidden rounded-2xl bg-white/5 border border-white/10 hover:border-secondary/50 p-4 transition-all duration-500">
+						<div class="h-64 rounded-xl overflow-hidden mb-6 relative">
+							<div class="absolute inset-0 bg-primary/20 group-hover:bg-transparent transition-colors duration-500"></div>
+							<div class="w-full h-full bg-slate-800 flex items-center justify-center">
+								<span class="text-secondary/30 italic text-5xl font-serif">Pino</span>
+							</div>
+						</div>
+						<h3 class="text-2xl font-bold mb-2">Pino Blanco</h3>
+						<p class="text-slate-400 mb-6">Fuerza y resiliencia en un diseño elegante y atemporal.</p>
+						<div class="flex justify-between items-center">
+							<span class="text-secondary font-bold">$180.00</span>
+							<button class="text-white hover:text-secondary transition-colors underline decoration-secondary">Detalles</button>
+						</div>
+					</div>
+
+					<!-- Card 3 -->
+					<div class="group relative overflow-hidden rounded-2xl bg-white/5 border border-white/10 hover:border-secondary/50 p-4 transition-all duration-500">
+						<div class="h-64 rounded-xl overflow-hidden mb-6 relative">
+							<div class="absolute inset-0 bg-primary/20 group-hover:bg-transparent transition-colors duration-500"></div>
+							<div class="w-full h-full bg-stone-900 flex items-center justify-center">
+								<span class="text-secondary/30 italic text-5xl font-serif">Olmo</span>
+							</div>
+						</div>
+						<h3 class="text-2xl font-bold mb-2">Olmo Chino</h3>
+						<p class="text-slate-400 mb-6">Ideal para principiantes por su adaptabilidad y belleza natural.</p>
+						<div class="flex justify-between items-center">
+							<span class="text-secondary font-bold">$85.00</span>
+							<button class="text-white hover:text-secondary transition-colors underline decoration-secondary">Detalles</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Why Us Section -->
+		<section class="py-24 bg-gradient-to-b from-slate-950 to-emerald-950/20">
+			<div class="container mx-auto px-6">
+				<div class="flex flex-col md:flex-row items-center gap-16">
+					<div class="md:w-1/2">
+						<div class="relative w-full aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl">
+							<div class="absolute inset-0 bg-primary opacity-40"></div>
+							<div class="absolute inset-0 flex items-center justify-center border border-white/10 m-4 rounded-2xl">
+								<p class="text-center italic text-secondary text-2xl font-serif px-8 leading-loose">
+									"Un bonsai no es solo un árbol, es un fragmento de tiempo capturado en su mejor forma."
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="md:w-1/2">
+						<h2 class="text-4xl md:text-5xl font-bold mb-10 leading-tight">Mucho más que una planta</h2>
+						<div class="space-y-8">
+							<div class="flex gap-6">
+								<div class="w-12 h-12 shrink-0 rounded-full bg-secondary/10 flex items-center justify-center border border-secondary/20">
+									<span class="text-secondary font-bold">01</span>
+								</div>
+								<div>
+									<h4 class="text-xl font-bold mb-2">Curación de Expertos</h4>
+									<p class="text-slate-400">Cada ejemplar es seleccionado y cuidado por maestros artistas durante años antes de llegar a ti.</p>
+								</div>
+							</div>
+							<div class="flex gap-6">
+								<div class="w-12 h-12 shrink-0 rounded-full bg-secondary/10 flex items-center justify-center border border-secondary/20">
+									<span class="text-secondary font-bold">02</span>
+								</div>
+								<div>
+									<h4 class="text-xl font-bold mb-2">Kit de Bienvenida</h4>
+									<p class="text-slate-400">Incluimos todo lo necesario para su cuidado inicial, guías personalizadas y acceso a nuestra comunidad VIP.</p>
+								</div>
+							</div>
+							<div class="flex gap-6">
+								<div class="w-12 h-12 shrink-0 rounded-full bg-secondary/10 flex items-center justify-center border border-secondary/20">
+									<span class="text-secondary font-bold">03</span>
+								</div>
+								<div>
+									<h4 class="text-xl font-bold mb-2">Garantía de Sustentabilidad</h4>
+									<p class="text-slate-400">Todas nuestras macetas y sustratos son orgánicos y eco-amigables con el medio ambiente peruano.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Footer -->
+		<footer id="contacto" class="py-12 border-t border-white/5 bg-slate-950">
+			<div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
+				<div class="text-2xl font-bold">
+					<span class="text-secondary tracking-tighter">Wasi</span><span class="text-white font-light">Bonsai</span>
+				</div>
+				<p class="text-slate-500 text-sm">© 2026 WasiBonsai. Hecho con amor en Perú.</p>
+				<div class="flex gap-6 text-slate-400">
+					<a href="#" class="hover:text-secondary transition-colors">Instagram</a>
+					<a href="#" class="hover:text-secondary transition-colors">Facebook</a>
+					<a href="#" class="hover:text-secondary transition-colors">WhatsApp</a>
+				</div>
+			</div>
+		</footer>
+	</main>
+</Layout>
