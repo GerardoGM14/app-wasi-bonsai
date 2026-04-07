@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import CookieAlert from '../components/CookieAlert.tsx';
 
 interface Props {
 	title: string;
@@ -22,7 +23,7 @@ const {
 		<!-- Global Metadata -->
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
 
 		<!-- Canonical URL -->
@@ -50,9 +51,52 @@ const {
 		<!-- Fonts -->
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Asap:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 	</head>
-	<body class="bg-slate-950 text-slate-100 font-sans selection:bg-blue-500/30">
+	<body class="bg-slate-950 text-slate-100 font-['Asap'] selection:bg-orange-500/30">
+		<!-- Minimalist Page Loader (Robust Spinner) -->
+		<div id="page-loader" class="fixed inset-0 z-[200] flex items-center justify-center bg-slate-950/80 backdrop-blur-2xl transition-opacity duration-1000">
+			<svg class="h-16 w-16 animate-spin text-comprar" viewBox="0 0 50 50">
+				<circle 
+					class="opacity-0" 
+					cx="25" cy="25" r="20" stroke="currentColor" stroke-width="5"
+				></circle>
+				<path 
+					fill="none" 
+					stroke="currentColor" 
+					stroke-width="5" 
+					stroke-linecap="round" 
+					d="M25 5 A20 20 0 0 1 45 25"
+				></path>
+			</svg>
+		</div>
+
 		<slot />
+		<CookieAlert client:load />
+
+		<!-- Loader Script (Dynamic + Mínimo 2s) -->
+		<script is:inline>
+			(function() {
+				const startTime = Date.now();
+				const minDuration = 2000; // 2 segundos mínimo
+				const loader = document.getElementById('page-loader');
+
+				const hideLoader = () => {
+					const elapsedTime = Date.now() - startTime;
+					const remainingTime = Math.max(0, minDuration - elapsedTime);
+
+					setTimeout(() => {
+						if (loader) {
+							loader.style.opacity = '0';
+							setTimeout(() => {
+								loader.style.display = 'none';
+							}, 1000); // Mismo tiempo que el fade-out
+						}
+					}, remainingTime);
+				};
+
+				window.addEventListener('load', hideLoader);
+			})();
+		</script>
 	</body>
 </html>

@@ -1,12 +1,23 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #1e3a1e; /* Forest green */
-  --color-secondary: #d1b48c; /* Sand/Gold */
-  --color-accent: #f43f5e;
+  --color-primary: #1e3a1e; /* Forest green original */
+  --color-bar: #7A6051; /* El color sugerido para la barra */
+  --color-asap-text: #E1D7D1; /* El color para el texto Asap */
+  --color-comprar: #DA7D01; /* El color sugerido para el botón comprar */
+  --color-secondary: #d1b48c; /* Sand/Gold original */
   --color-brand-900: #061006;
   --color-brand-800: #0d210d;
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+html, body {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+html::-webkit-scrollbar, 
+body::-webkit-scrollbar {
+  display: none !important; /* Chrome, Safari, Opera */
 }
 
 @layer base {
@@ -14,7 +25,6 @@
     scroll-behavior: smooth;
   }
   body {
-    background-color: #030712;
-    color: #f3f4f6;
+    @apply bg-slate-950 text-slate-100 antialiased;
   }
 }
