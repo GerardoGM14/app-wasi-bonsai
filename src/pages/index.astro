@@ -3,6 +3,8 @@ import Layout from "../layouts/Layout.astro";
 import { Image } from "astro:assets";
 import heroImage from "../assets/images/background-wasibonsai.webp";
 import logoWasi from "../assets/images/logo-wasibonsai.svg";
+import iconHojas from "../assets/icons/icon-hojas.png";
+import productosGravavolcanica from "../assets/images/productos-gravavolcanica.png";
 import iconoRaices from "../assets/icons/icono-raices.svg";
 import iconoNutrientes from "../assets/icons/icono-nutrientes.svg";
 import iconoCompacto from "../assets/icons/icono-compacto.svg";
@@ -270,7 +272,18 @@ import iconoPlaga from "../assets/icons/icono-plaga.svg";
 		</section>
 
 		<!-- Collections Section -->
-		<section id="coleccion" class="py-24 bg-[#E1D7D1]">
+		<section id="coleccion" class="py-24 bg-[#E1D7D1] relative overflow-hidden">
+			<!-- Decorative Leaves -->
+			<Image 
+				src={iconHojas} 
+				alt="" 
+				class="absolute top-0 left-0 w-40 md:w-80 opacity-100 pointer-events-none"
+			/>
+			<Image 
+				src={iconHojas} 
+				alt="" 
+				class="absolute bottom-0 right-0 w-40 md:w-80 opacity-100 rotate-180 pointer-events-none"
+			/>
 			<div class="container mx-auto px-6">
 				<div class="text-center mb-16 max-w-3xl mx-auto">
 					<h2 class="font-['Asap'] tracking-tight leading-tight mb-3">
@@ -296,137 +309,16 @@ import iconoPlaga from "../assets/icons/icono-plaga.svg";
 					</p>
 				</div>
 
-				<div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-					<!-- Card 1 -->
-					<div
-						class="group relative overflow-hidden rounded-3xl bg-white/40 border border-white/60 hover:bg-white/60 p-5 transition-all duration-500 shadow-sm hover:shadow-xl"
-					>
-						<div
-							class="h-72 rounded-2xl overflow-hidden mb-6 relative shadow-inner"
-						>
-							<div
-								class="absolute inset-0 bg-[#3D4329]/10 group-hover:bg-transparent transition-colors duration-500"
-							>
-							</div>
-							<div
-								class="w-full h-full bg-emerald-900/20 flex items-center justify-center"
-							>
-								<span
-									class="text-[#3D4329]/20 italic text-5xl font-serif"
-									>Arce</span
-								>
-							</div>
-						</div>
-						<h3
-							class="text-2xl font-bold mb-2 text-[#3D4329] font-['Asap']"
-						>
-							Arce Rojo
-						</h3>
-						<p
-							class="text-[#7A6051] mb-8 font-medium leading-relaxed"
-						>
-							Colores vibrantes que cambian con las estaciones, un
-							espectáculo vivo para tu hogar.
-						</p>
-						<div
-							class="flex justify-between items-center pt-4 border-t border-[#3D4329]/10"
-						>
-							<span class="text-2xl font-bold text-[#3D4329]"
-								>$120.00</span
-							>
-							<button
-								class="bg-[#3D4329] text-white px-6 py-2 rounded-full font-bold text-sm hover:translate-x-1 transition-all duration-300"
-								>Detalles</button
-							>
-						</div>
+				<div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mt-4 max-w-5xl mx-auto px-4">
+					<div class="w-full">
+						<Image 
+							src={productosGravavolcanica} 
+							alt="Productos Grava Volcánica" 
+							class="w-full h-auto"
+						/>
 					</div>
-
-					<!-- Card 2 -->
-					<div
-						class="group relative overflow-hidden rounded-3xl bg-white/40 border border-white/60 hover:bg-white/60 p-5 transition-all duration-500 shadow-sm hover:shadow-xl"
-					>
-						<div
-							class="h-72 rounded-2xl overflow-hidden mb-6 relative shadow-inner"
-						>
-							<div
-								class="absolute inset-0 bg-[#3D4329]/10 group-hover:bg-transparent transition-colors duration-500"
-							>
-							</div>
-							<div
-								class="w-full h-full bg-slate-800/20 flex items-center justify-center"
-							>
-								<span
-									class="text-[#3D4329]/20 italic text-5xl font-serif"
-									>Pino</span
-								>
-							</div>
-						</div>
-						<h3
-							class="text-2xl font-bold mb-2 text-[#3D4329] font-['Asap']"
-						>
-							Pino Blanco
-						</h3>
-						<p
-							class="text-[#7A6051] mb-8 font-medium leading-relaxed"
-						>
-							Fuerza y resiliencia en un diseño elegante y
-							atemporal. Perfecto para principiantes.
-						</p>
-						<div
-							class="flex justify-between items-center pt-4 border-t border-[#3D4329]/10"
-						>
-							<span class="text-2xl font-bold text-[#3D4329]"
-								>$180.00</span
-							>
-							<button
-								class="bg-[#3D4329] text-white px-6 py-2 rounded-full font-bold text-sm hover:translate-x-1 transition-all duration-300"
-								>Detalles</button
-							>
-						</div>
-					</div>
-
-					<!-- Card 3 -->
-					<div
-						class="group relative overflow-hidden rounded-3xl bg-white/40 border border-white/60 hover:bg-white/60 p-5 transition-all duration-500 shadow-sm hover:shadow-xl"
-					>
-						<div
-							class="h-72 rounded-2xl overflow-hidden mb-6 relative shadow-inner"
-						>
-							<div
-								class="absolute inset-0 bg-[#3D4329]/10 group-hover:bg-transparent transition-colors duration-500"
-							>
-							</div>
-							<div
-								class="w-full h-full bg-stone-900/20 flex items-center justify-center"
-							>
-								<span
-									class="text-[#3D4329]/20 italic text-5xl font-serif"
-									>Olmo</span
-								>
-							</div>
-						</div>
-						<h3
-							class="text-2xl font-bold mb-2 text-[#3D4329] font-['Asap']"
-						>
-							Olmo Chino
-						</h3>
-						<p
-							class="text-[#7A6051] mb-8 font-medium leading-relaxed"
-						>
-							Ideal por su adaptabilidad y belleza natural. Un
-							fragmento de naturaleza en miniatura.
-						</p>
-						<div
-							class="flex justify-between items-center pt-4 border-t border-[#3D4329]/10"
-						>
-							<span class="text-2xl font-bold text-[#3D4329]"
-								>$85.00</span
-							>
-							<button
-								class="bg-[#3D4329] text-white px-6 py-2 rounded-full font-bold text-sm hover:translate-x-1 transition-all duration-300"
-								>Detalles</button
-							>
-						</div>
+					<div class="w-full aspect-square md:aspect-auto md:h-[400px] bg-[#7A6051] rounded-3xl">
+						<!-- Tarjeta vacía para contenido futuro -->
 					</div>
 				</div>
 			</div>

@@ -38,3 +38,10 @@ body::-webkit-scrollbar {
     @apply bg-slate-950 text-slate-100 antialiased;
   }
 }
+
+/* Ajuste de Zoom 90% para resolución específica ~1706px */
+@media (min-width: 1700px) {
+  html {
+    zoom: 0.9;
+  }
+}
