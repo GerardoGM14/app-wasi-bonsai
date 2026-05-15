@@ -1,0 +1,87 @@
+---
+import { Image } from "astro:assets";
+import heroImage from "../assets/images/background-wasibonsai.webp";
+import iconoRaices from "../assets/icons/icono-raices.svg";
+import iconoNutrientes from "../assets/icons/icono-nutrientes.svg";
+import iconoCompacto from "../assets/icons/icono-compacto.svg";
+import iconoAgua from "../assets/icons/icono-agua.svg";
+import iconoPlaga from "../assets/icons/icono-plaga.svg";
+---
+
+<section id="inicio" class="relative min-h-screen flex flex-col justify-center pt-20 overflow-hidden">
+    <div class="absolute inset-0 z-0">
+        <Image
+            src={heroImage}
+            alt="WasiBonsai Hero"
+            class="w-full h-full object-cover object-center brightness-[0.5]"
+            loading="eager"
+            fetchpriority="high"
+            quality={100}
+            width={1920}
+        />
+        <div class="absolute inset-0 bg-gradient-to-r from-[#3D4329]/55 via-[#3D4329]/35 to-[#495424]/45"></div>
+    </div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-6 pt-12 md:pt-24 flex flex-col items-start w-full">
+        <div class="max-w-3xl space-y-8">
+            <h1 class="text-4xl md:text-[44px] font-bold text-[#E1D7D1] leading-tight font-['Asap'] tracking-tight">
+                La vida de un árbol <br /> empieza en sus raíces.
+            </h1>
+            <p class="text-lg md:text-xl text-[#E1D7D1] leading-snug font-['Asap'] max-w-xl font-semibold opacity-90">
+                Dale a tus bonsáis el mejor sustrato para vivir, <br /> dales
+                <span class="font-bold text-[#F3F3F3] whitespace-nowrap">BonsaiPro.</span>
+            </p>
+
+            <button class="bg-comprar text-white px-8 py-2 rounded-full font-bold text-sm md:text-base shadow-xl hover:-translate-y-1 hover:brightness-110 active:scale-95 transition-all duration-300 font-['Asap']">
+                Comprar
+            </button>
+        </div>
+
+        {/* Características Bar */}
+        <div class="w-full mt-24 md:mt-40">
+            <div class="border-t border-white/20 w-full mb-8"></div>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-6 md:gap-4 text-center">
+                <div class="flex flex-col items-center group cursor-default">
+                    <p class="text-[11px] md:text-sm text-white/80 font-['Asap'] mb-5 h-10 flex items-center leading-tight px-2">
+                        Fomenta el <br /> crecimiento de raíces
+                    </p>
+                    <div class="h-10 md:h-14 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <Image src={iconoRaices} alt="Icono Raíces" class="w-10 h-10 md:w-14 md:h-14" />
+                    </div>
+                </div>
+                <div class="flex flex-col items-center group cursor-default">
+                    <p class="text-[11px] md:text-sm text-white/80 font-['Asap'] mb-5 h-10 flex items-center leading-tight px-2">
+                        Almacena agua con <br /> nutrientes
+                    </p>
+                    <div class="h-10 md:h-14 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <Image src={iconoNutrientes} alt="Icono Nutrientes" class="w-10 h-10 md:w-14 md:h-14" />
+                    </div>
+                </div>
+                <div class="flex flex-col items-center group cursor-default">
+                    <p class="text-[11px] md:text-sm text-white/80 font-['Asap'] mb-5 h-10 flex items-center leading-tight px-2">
+                        No se compacta ni se <br /> degrada
+                    </p>
+                    <div class="h-10 md:h-14 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <Image src={iconoCompacto} alt="Icono Compacto" class="w-10 h-10 md:w-14 md:h-14" />
+                    </div>
+                </div>
+                <div class="flex flex-col items-center group cursor-default">
+                    <p class="text-[11px] md:text-sm text-white/80 font-['Asap'] mb-5 h-10 flex items-center leading-tight px-2">
+                        Drena el exceso de <br /> agua
+                    </p>
+                    <div class="h-10 md:h-14 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <Image src={iconoAgua} alt="Icono Agua" class="w-10 h-10 md:w-14 md:h-14" />
+                    </div>
+                </div>
+                <div class="flex flex-col items-center group cursor-default">
+                    <p class="text-[11px] md:text-sm text-white/80 font-['Asap'] mb-5 h-10 flex items-center leading-tight px-2">
+                        Previene plagas y <br /> enfermedades
+                    </p>
+                    <div class="h-10 md:h-14 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <Image src={iconoPlaga} alt="Icono Plaga" class="w-10 h-10 md:w-14 md:h-14" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

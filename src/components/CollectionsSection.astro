@@ -1,0 +1,189 @@
+---
+import { Image } from "astro:assets";
+import iconHojas from "../assets/icons/icon-hojas.png";
+import productosGravavolcanica from "../assets/images/productos-gravavolcanica.png";
+import iconFlechaIzq from "../assets/icons/icono-flecha-izquierda.svg";
+import iconFlechaDer from "../assets/icons/icono-flecha-derecha.svg";
+import iconCheck from "../assets/icons/icon-check.svg";
+import iconCompra from "../assets/icons/icono-compra.svg";
+import productosGravavolcanicaV1 from "../assets/images/productos-gravavolcanica_v1.png";
+---
+
+<section id="coleccion" class="pt-46 pb-12 bg-[#E1D7D1] relative overflow-hidden">
+    <!-- Decorative Leaves -->
+    <Image src={iconHojas} alt="" class="absolute top-0 left-0 w-40 md:w-80 opacity-100 pointer-events-none" />
+    <Image src={iconHojas} alt="" class="absolute bottom-0 right-0 w-40 md:w-80 opacity-100 rotate-180 pointer-events-none" />
+    
+    <div class="container mx-auto px-6 -mt-20 relative z-10">
+        <div class="text-center mb-10 max-w-3xl mx-auto">
+            <h2 class="font-['Asap'] tracking-tight leading-tight mb-3">
+                <span class="text-4xl md:text-5xl font-black text-[#8B5000] block mb-2">BonsaiPro</span>
+                <span class="text-2xl md:text-3xl block">
+                    <span class="font-semibold text-[#7A6051]">Diseñado para cultivar bonsáis</span>
+                    <span class="font-bold text-[#8B5000]">de alta calidad</span>
+                </span>
+            </h2>
+            <p class="text-lg md:text-xl text-[#7A6051] font-normal leading-snug">
+                Sustrato a base de roca volcánica, el mejor componente para que tus árboles crezcan fuertes y tengan un desarrollo saludable.
+            </p>
+        </div>
+
+        <div class="relative mt-4">
+            <button id="prev-slide" class="absolute -left-4 lg:-left-16 top-[30%] -translate-y-1/2 z-20 cursor-pointer hover:scale-110 transition-transform active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed" aria-label="Anterior">
+                <Image src={iconFlechaIzq} alt="" class="w-10 h-10 md:w-12 md:h-12" />
+            </button>
+
+            <div class="overflow-hidden -mb-24 pb-24">
+                <div id="carousel-track" class="flex transition-transform duration-500 ease-out">
+                    <!-- Slide 1 -->
+                    <div class="w-full flex-shrink-0 pb-24">
+                        <div class="grid grid-cols-1 md:grid-cols-[1.1fr_0.9fr] gap-8 items-center max-w-6xl mx-auto px-4">
+                            <div class="w-full">
+                                <Image src={productosGravavolcanica} alt="Productos Grava Volcánica" class="w-full h-auto transition-transform duration-500 hover:scale-105" />
+                            </div>
+                            <div class="w-full aspect-square md:aspect-auto md:h-[420px] bg-[#7A6051] rounded-3xl p-8 md:p-10 pt-6 md:pt-8 flex flex-col justify-start border border-white/10 relative group">
+                                <div class="relative z-10">
+                                    <h3 class="text-[#FFFFFF] text-3xl md:text-4xl font-bold mb-1">PROMO 3X2</h3>
+                                    <p class="text-[#E9E1DC] text-lg md:text-xl mb-4 font-medium">Lleva 3 unidades, paga solo:</p>
+                                    <div class="flex items-baseline gap-4 mb-4">
+                                        <span class="text-[#FFFFFF] text-4xl md:text-5xl font-bold">S/. 38</span>
+                                        <span class="text-[#FFCA84] text-2xl md:text-3xl line-through decoration-2 opacity-90">S/. 57</span>
+                                    </div>
+                                    <ul class="space-y-2">
+                                        <li class="flex items-start gap-4 text-[#E9E1DC] text-lg">
+                                            <Image src={iconCheck} alt="" class="w-6 h-6 mt-1 shrink-0" />
+                                            <span>Mezcla <strong class="font-bold text-white">lista para usar</strong></span>
+                                        </li>
+                                        <li class="flex items-start gap-4 text-[#E9E1DC] text-lg">
+                                            <Image src={iconCheck} alt="" class="w-6 h-6 mt-1 shrink-0" />
+                                            <span><strong class="font-bold text-white">Cierre hermético</strong> para un uso cómodo</span>
+                                        </li>
+                                        <li class="flex items-start gap-4 text-[#E9E1DC] text-lg">
+                                            <Image src={iconCheck} alt="" class="w-6 h-6 mt-1 shrink-0" />
+                                            <span><strong class="font-bold text-white">5 litros</strong> de rendimiento por bolsa</span>
+                                        </li>
+                                        <li class="flex items-start gap-4 text-[#E9E1DC] text-lg">
+                                            <Image src={iconCheck} alt="" class="w-6 h-6 mt-1 shrink-0" />
+                                            <span><strong class="font-bold text-white">El mejor sustituto</strong> del sustrato japonés</span>
+                                        </li>
+                                        <li class="flex items-start gap-4 text-[#E9E1DC] text-lg">
+                                            <Image src={iconCheck} alt="" class="w-6 h-6 mt-1 shrink-0" />
+                                            <span><strong class="font-bold text-white">Delivery gratis</strong> a distritos seleccionados</span>
+                                        </li>
+                                    </ul>
+                                    <button class="absolute -bottom-24 left-1/2 -translate-x-1/2 bg-[#DA7D01] text-white py-4 px-10 rounded-2xl font-semibold text-lg flex items-center justify-center gap-3 shadow-2xl hover:scale-105 transition-all active:scale-95 whitespace-nowrap z-50 cursor-pointer">
+                                        <Image src={iconCompra} alt="" class="w-6 h-auto" />
+                                        <span>Comprar Ahora</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 2 -->
+                    <div class="w-full flex-shrink-0 pb-24">
+                        <div class="grid grid-cols-1 md:grid-cols-[1.1fr_0.9fr] gap-8 items-center max-w-6xl mx-auto px-4">
+                            <div class="w-full">
+                                <Image src={productosGravavolcanicaV1} alt="Productos Grava Volcánica V1" class="w-full h-auto transition-transform duration-500 hover:scale-105" />
+                            </div>
+                            <div class="w-full aspect-square md:aspect-auto md:h-[420px] bg-[#7A6051] rounded-3xl p-8 md:p-10 pt-6 md:pt-8 flex flex-col justify-start border border-white/10 relative group">
+                                <div class="relative z-10">
+                                    <h3 class="text-[#FFFFFF] text-3xl md:text-4xl font-bold mb-1">BonsaiPro - Und</h3>
+                                    <p class="text-[#E9E1DC] text-lg md:text-xl mb-4 font-medium">Lleva 3 unidades, paga solo:</p>
+                                    <div class="flex items-baseline gap-4 mb-4">
+                                        <span class="text-[#FFFFFF] text-4xl md:text-5xl font-bold">S/. 19</span>
+                                        <span class="text-[#FFCA84] text-2xl md:text-3xl line-through decoration-2 opacity-90">S/. 28</span>
+                                    </div>
+                                    <ul class="space-y-2">
+                                        <li class="flex items-start gap-4 text-[#E9E1DC] text-lg">
+                                            <Image src={iconCheck} alt="" class="w-6 h-6 mt-1 shrink-0" />
+                                            <span>Mezcla <strong class="font-bold text-white">lista para usar</strong></span>
+                                        </li>
+                                        <li class="flex items-start gap-4 text-[#E9E1DC] text-lg">
+                                            <Image src={iconCheck} alt="" class="w-6 h-6 mt-1 shrink-0" />
+                                            <span><strong class="font-bold text-white">Cierre hermético</strong> para un uso cómodo</span>
+                                        </li>
+                                        <li class="flex items-start gap-4 text-[#E9E1DC] text-lg">
+                                            <Image src={iconCheck} alt="" class="w-6 h-6 mt-1 shrink-0" />
+                                            <span><strong class="font-bold text-white">5 litros</strong> de rendimiento por bolsa</span>
+                                        </li>
+                                        <li class="flex items-start gap-4 text-[#E9E1DC] text-lg">
+                                            <Image src={iconCheck} alt="" class="w-6 h-6 mt-1 shrink-0" />
+                                            <span><strong class="font-bold text-white">El mejor sustituto</strong> del sustrato japonés</span>
+                                        </li>
+                                        <li class="flex items-start gap-4 text-[#E9E1DC] text-lg">
+                                            <Image src={iconCheck} alt="" class="w-6 h-6 mt-1 shrink-0" />
+                                            <span><strong class="font-bold text-white">Delivery gratis</strong> a distritos seleccionados</span>
+                                        </li>
+                                    </ul>
+                                    <button class="absolute -bottom-24 left-1/2 -translate-x-1/2 bg-[#DA7D01] text-white py-4 px-10 rounded-2xl font-semibold text-lg flex items-center justify-center gap-3 shadow-2xl hover:scale-105 transition-all active:scale-95 whitespace-nowrap z-50 cursor-pointer">
+                                        <Image src={iconCompra} alt="" class="w-6 h-auto" />
+                                        <span>Comprar Ahora</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <button id="next-slide" class="absolute -right-4 lg:-right-16 top-[30%] -translate-y-1/2 z-20 cursor-pointer hover:scale-110 transition-transform active:scale-95" aria-label="Siguiente">
+                <Image src={iconFlechaDer} alt="" class="w-10 h-10 md:w-12 md:h-12" />
+            </button>
+        </div>
+
+        <!-- Puntos de paginación -->
+        <div class="flex justify-center gap-3 mt-0">
+            <button id="dot-0" class="w-4 h-4 rounded-full bg-[#DA7D01] transition-all duration-300 cursor-pointer" aria-label="Ir a slide 1"></button>
+            <button id="dot-1" class="w-4 h-4 rounded-full border border-[#7A6051] transition-all duration-300 cursor-pointer" aria-label="Ir a slide 2"></button>
+        </div>
+    </div>
+</section>
+
+<script>
+    const track = document.getElementById('carousel-track');
+    const nextBtn = document.getElementById('next-slide');
+    const prevBtn = document.getElementById('prev-slide');
+    const dots = [document.getElementById('dot-0'), document.getElementById('dot-1')];
+    
+    let currentIndex = 0;
+
+    function updateCarousel() {
+        if (track) track.style.transform = `translateX(-${currentIndex * 100}%)`;
+        
+        dots.forEach((dot, index) => {
+            if (dot) {
+                if (index === currentIndex) {
+                    dot.classList.add('bg-[#DA7D01]');
+                    dot.classList.remove('border', 'border-[#7A6051]');
+                } else {
+                    dot.classList.remove('bg-[#DA7D01]');
+                    dot.classList.add('border', 'border-[#7A6051]');
+                }
+            }
+        });
+    }
+
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % 2;
+            updateCarousel();
+        });
+    }
+
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + 2) % 2;
+            updateCarousel();
+        });
+    }
+
+    dots.forEach((dot, index) => {
+        if (dot) {
+            dot.addEventListener('click', () => {
+                currentIndex = index;
+                updateCarousel();
+            });
+        }
+    });
+</script>

@@ -1,0 +1,55 @@
+---
+import { Image } from "astro:assets";
+import logoWasi from "../assets/images/logo-wasibonsai.svg";
+---
+
+<nav class="fixed top-0 w-full z-50 px-6 py-4 bg-bar border-b border-white/5 shadow-lg">
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+        <div class="flex items-center">
+            <Image
+                src={logoWasi}
+                alt="WasiBonsai Logo"
+                class="h-8 md:h-10 w-auto"
+            />
+        </div>
+
+        {/* Desktop Links */}
+        <div class="hidden lg:flex gap-10 text-[15px] font-medium items-center text-asap-text">
+            <a href="#que-es" class="hover:text-white transition-colors duration-300 tracking-tight">¿Qué es BonsaiPro?</a>
+            <a href="#beneficios" class="hover:text-white transition-colors duration-300 tracking-tight">Beneficios de BonsaiPro</a>
+            <a href="#como-usar" class="hover:text-white transition-colors duration-300 tracking-tight">¿Cómo usar BonsaiPro?</a>
+            <a href="#clientes" class="hover:text-white transition-colors duration-300 tracking-tight">Nuestros clientes</a>
+            <button class="bg-comprar text-white px-6 md:px-8 py-2.5 rounded-full font-bold hover:-translate-y-1 hover:brightness-110 transition-all duration-300 cursor-pointer text-sm">
+                Comprar
+            </button>
+        </div>
+
+        {/* Mobile Menu Trigger & Comprar Button */}
+        <div class="flex lg:hidden items-center gap-4">
+            <button class="bg-comprar text-white px-5 py-1.5 rounded-full font-bold text-xs">
+                Comprar
+            </button>
+            <button id="menu-toggle" class="text-asap-text p-1" aria-label="Abrir menú">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-7 h-7">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    {/* Mobile Menu Overlay */}
+    <div id="mobile-menu" class="hidden fixed inset-0 top-[70px] bg-bar/98 backdrop-blur-xl z-40 flex flex-col p-8 gap-8 text-xl font-bold text-asap-text items-center text-center animate-in fade-in slide-in-from-top-4 duration-300">
+        <a href="#que-es" class="menu-link border-b border-white/5 w-full pb-4">¿Qué es BonsaiPro?</a>
+        <a href="#beneficios" class="menu-link border-b border-white/5 w-full pb-4">Beneficios de BonsaiPro</a>
+        <a href="#como-usar" class="menu-link border-b border-white/5 w-full pb-4">¿Cómo usar BonsaiPro?</a>
+        <a href="#clientes" class="menu-link w-full pb-4">Nuestros clientes</a>
+    </div>
+</nav>
+
+<script is:inline>
+    const btn = document.getElementById("menu-toggle");
+    const menu = document.getElementById("mobile-menu");
+    const links = document.querySelectorAll(".menu-link");
+    btn.onclick = () => menu.classList.toggle("hidden");
+    links.forEach((l) => (l.onclick = () => menu.classList.add("hidden")));
+</script>

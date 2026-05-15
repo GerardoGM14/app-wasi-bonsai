@@ -1,0 +1,157 @@
+---
+import { Image } from "astro:assets";
+import bgSeccion2 from "../assets/images/background-wasibonsai-seccion2.jpg";
+import iconoRaices from "../assets/icons/icono-raices.svg";
+import iconoNutrientes from "../assets/icons/icono-nutrientes.svg";
+import iconoCompacto from "../assets/icons/icono-compacto.svg";
+import iconoAgua from "../assets/icons/icono-agua.svg";
+import iconoPlaga from "../assets/icons/icono-plaga.svg";
+---
+
+<section class="relative min-h-[900px] flex items-center overflow-hidden py-40">
+    <div class="absolute inset-0 z-0">
+        <Image src={bgSeccion2} alt="Background Seccion 2" class="w-full h-full object-cover" />
+        <div class="absolute inset-0 bg-gradient-to-b from-[#8C6F5D]/90 via-[#5B4F47]/90 to-[#353535]/90"></div>
+    </div>
+
+    <div class="container mx-auto px-6 relative z-10">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="font-['Asap'] font-extrabold text-[30px] leading-[38px] text-white mb-10 tracking-tight">
+                ¿Por qué usar BonsaiPro, <br />
+                sustrato a base de roca volcánica?
+            </h2>
+            
+            <div class="space-y-8">
+                <p class="font-['Asap'] font-semibold text-[20px] leading-[28px] text-[#F0EBE8]">
+                    La roca volcánica es el resultado del enfriamiento del magma expulsado por los volcanes al hacer erupción. 
+                    Cuando la lava se cristaliza, se forma una roca con muchos agujeros en su interior (poros).
+                </p>
+                <p class="font-['Asap'] font-semibold text-[20px] leading-[28px] text-[#F0EBE8]">
+                    Esta estructura porosa brinda <span class="font-bold text-[#DA7D01]">BENEFICIOS CLAVE</span> para el cultivo y buen desarrollo de los árboles en miniaura y plantas en maceta.
+                </p>
+            </div>
+        </div>
+
+        <!-- Interactive Tabs Component -->
+        <div class="mt-16 w-full max-w-5xl mx-auto shadow-2xl rounded-xl overflow-hidden">
+            <!-- Top Content Box -->
+            <div class="bg-[#E1D7D1] p-8 md:p-12 text-center rounded-t-xl relative z-10 transition-all duration-300 min-h-[160px] flex items-center justify-center">
+                <p id="tab-content" class="font-['Asap'] font-bold text-xl md:text-2xl text-[#8B5000] leading-snug transition-all duration-500 opacity-100 translate-y-0">
+                    Tus bonsáis desarrollan raíces finas y activas, logrando árboles más fuertes y fáciles de formar.
+                </p>
+            </div>
+            
+            <!-- Tabs Row -->
+            <div class="grid grid-cols-2 md:grid-cols-5 relative z-0">
+                <!-- Tab 1 -->
+                <button class="tab-btn active bg-[#E1D7D1] text-[#8B5000] p-4 flex flex-col items-center justify-center gap-3 md:rounded-bl-xl transition-all duration-300 cursor-pointer" data-index="0">
+                    <span class="font-['Asap'] font-bold text-sm text-center leading-tight">Fomenta el <br> crecimiento de raíces</span>
+                    <Image src={iconoRaices} alt="Raíces" class="w-10 h-10 icon-filter-active" />
+                </button>
+                <!-- Tab 2 -->
+                <button class="tab-btn bg-[#7A6051] text-[#E1D7D1] p-4 flex flex-col items-center justify-center gap-3 transition-all duration-300 cursor-pointer" data-index="1">
+                    <span class="font-['Asap'] font-semibold text-sm text-center leading-tight">Almacena agua con <br> nutrientes</span>
+                    <Image src={iconoNutrientes} alt="Nutrientes" class="w-10 h-10 icon-filter-inactive" />
+                </button>
+                <!-- Tab 3 -->
+                <button class="tab-btn bg-[#7A6051] text-[#E1D7D1] p-4 flex flex-col items-center justify-center gap-3 transition-all duration-300 cursor-pointer" data-index="2">
+                    <span class="font-['Asap'] font-semibold text-sm text-center leading-tight">No se compacta ni se <br> degrada</span>
+                    <Image src={iconoCompacto} alt="Compacto" class="w-10 h-10 icon-filter-inactive" />
+                </button>
+                <!-- Tab 4 -->
+                <button class="tab-btn bg-[#7A6051] text-[#E1D7D1] p-4 flex flex-col items-center justify-center gap-3 transition-all duration-300 cursor-pointer" data-index="3">
+                    <span class="font-['Asap'] font-semibold text-sm text-center leading-tight">Drena el exceso de <br> agua</span>
+                    <Image src={iconoAgua} alt="Agua" class="w-10 h-10 icon-filter-inactive" />
+                </button>
+                <!-- Tab 5 -->
+                <button class="tab-btn bg-[#7A6051] text-[#E1D7D1] p-4 flex flex-col items-center justify-center gap-3 md:rounded-br-xl transition-all duration-300 cursor-pointer" data-index="4">
+                    <span class="font-['Asap'] font-semibold text-sm text-center leading-tight">Previene plagas y <br> enfermedades</span>
+                    <Image src={iconoPlaga} alt="Plagas" class="w-10 h-10 icon-filter-inactive" />
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* Hover only for inactive tabs */
+    .tab-btn:not(.active):hover {
+        background-color: #8C6F5D;
+    }
+
+    /* CSS Filters to change SVG colors dynamically */
+    .icon-filter-active {
+        /* Aproximación al color #8B5000 */
+        filter: brightness(0) saturate(100%) invert(33%) sepia(96%) saturate(1209%) hue-rotate(18deg) brightness(94%) contrast(101%);
+    }
+    .icon-filter-inactive {
+        /* Aproximación al color #E1D7D1 */
+        filter: brightness(0) saturate(100%) invert(91%) sepia(8%) saturate(350%) hue-rotate(344deg) brightness(101%) contrast(92%);
+    }
+</style>
+
+<script>
+    // Datos de contenido para cada pestaña
+    const tabContents = [
+        "Tus bonsáis desarrollan raíces finas y activas, logrando árboles más fuertes y fáciles de formar.",
+        "Retiene la humedad y los fertilizantes en sus poros, liberándolos gradualmente según las necesidades de tu bonsái.",
+        "Su estructura física rígida no se deshace con el tiempo, garantizando una excelente aireación constante a largo plazo.",
+        "Evita el encharcamiento en la maceta gracias a su alta porosidad, reduciendo drásticamente el riesgo de pudrición.",
+        "Al ser un material inorgánico y limpio, crea un ambiente hostil para hongos, insectos y bacterias dañinas."
+    ];
+
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const contentDisplay = document.getElementById('tab-content');
+
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const index = parseInt(btn.getAttribute('data-index') || '0');
+
+            // 1. Resetear todos los botones
+            tabBtns.forEach(t => {
+                t.classList.remove('bg-[#E1D7D1]', 'text-[#8B5000]', 'active');
+                t.classList.add('bg-[#7A6051]', 'text-[#E1D7D1]');
+                
+                const textSpan = t.querySelector('span');
+                if(textSpan) {
+                    textSpan.classList.remove('font-bold');
+                    textSpan.classList.add('font-semibold');
+                }
+
+                const icon = t.querySelector('img');
+                if(icon) {
+                    icon.classList.remove('icon-filter-active');
+                    icon.classList.add('icon-filter-inactive');
+                }
+            });
+
+            // 2. Activar el botón seleccionado
+            btn.classList.remove('bg-[#7A6051]', 'text-[#E1D7D1]');
+            btn.classList.add('bg-[#E1D7D1]', 'text-[#8B5000]', 'active');
+            
+            const activeSpan = btn.querySelector('span');
+            if(activeSpan) {
+                activeSpan.classList.remove('font-semibold');
+                activeSpan.classList.add('font-bold');
+            }
+
+            const activeIcon = btn.querySelector('img');
+            if(activeIcon) {
+                activeIcon.classList.remove('icon-filter-inactive');
+                activeIcon.classList.add('icon-filter-active');
+            }
+
+            // 3. Actualizar el contenido con animación suave
+            if(contentDisplay) {
+                contentDisplay.style.opacity = '0';
+                contentDisplay.style.transform = 'translateY(10px)';
+                
+                setTimeout(() => {
+                    contentDisplay.textContent = tabContents[index];
+                    contentDisplay.style.opacity = '1';
+                    contentDisplay.style.transform = 'translateY(0)';
+                }, 250);
+            }
+        });
+    });
+</script>
