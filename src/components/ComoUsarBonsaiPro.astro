@@ -1,9 +1,15 @@
 ---
+import { Image } from "astro:assets";
+import imgTransplante from "../assets/images/transplante.png";
+import imgMantenimiento from "../assets/images/mantenimiento.png";
+import imgMaceta from "../assets/images/maceta.png";
+import imgDecorativo from "../assets/images/decorativo.png";
+
 interface Step {
   n: string;
   title: string;
   desc: string;
-  img: string;
+  img: any;
   alt: string;
 }
 
@@ -12,40 +18,37 @@ interface Props {
   eyebrow?: string;
   /** Pasos a mostrar. Cuatro por defecto. */
   steps?: Step[];
-  /** Ruta base de las imágenes en /public. */
-  imageBase?: string;
 }
 
 const {
   eyebrow = 'Guía de uso · 04 escenarios',
-  imageBase = '/images/bonsaipro',
   steps = [
     {
       n: '01',
       title: 'Transplantes',
       desc: 'Cambio de maceta y renovación de sustrato sin estresar las raíces.',
-      img: `${imageBase}/transplantes.png`,
+      img: imgTransplante,
       alt: 'Bolsa de sustrato BonsaiPro junto a un bonsái listo para transplante',
     },
     {
       n: '02',
       title: 'Mantenimiento',
       desc: 'Drenaje y aireación óptimos para el cuidado periódico de tu bonsái.',
-      img: `${imageBase}/mantenimiento.png`,
+      img: imgMantenimiento,
       alt: 'Aplicación de sustrato BonsaiPro a un bonsái en maceta',
     },
     {
       n: '03',
       title: 'Toda planta en maceta',
       desc: 'Suculentas, ornamentales y de interior — un sustrato para todas.',
-      img: `${imageBase}/maceta.png`,
+      img: imgMaceta,
       alt: 'Variedad de plantas y suculentas en macetas',
     },
     {
       n: '04',
       title: 'Decorativo',
       desc: 'Acabado limpio sobre la superficie, ideal para arreglos a la vista.',
-      img: `${imageBase}/decorativo.png`,
+      img: imgDecorativo,
       alt: 'Bonsái con raíces expuestas siendo trasplantado',
     },
   ],
@@ -66,7 +69,7 @@ const {
     <ul class="cards" role="list">
       {steps.map((s) => (
         <li class="card">
-          <img class="card-img" src={s.img} alt={s.alt} loading="lazy" decoding="async" />
+          <Image class="card-img" src={s.img} alt={s.alt} />
           <div class="overlay" aria-hidden="true"></div>
           <div class="body">
             <span class="step">Paso {s.n}</span>
@@ -88,7 +91,7 @@ const {
   */
   .bp-section {
     background: #E1D7D1; /* Adaptado al color de fondo de la web */
-    padding: 100px 24px;
+    padding: 100px 24px 70px;
     color: #6b574a;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
   }
@@ -182,9 +185,9 @@ const {
     inset: 0;
     background: linear-gradient(
       180deg,
-      rgba(0,0,0,0) 35%,
-      rgba(40,25,12,0.15) 55%,
-      rgba(40,25,12,0.78) 100%
+      rgba(255, 255, 255, 0) 0%,
+      rgba(185, 168, 157, 0.33) 62%,
+      rgba(140, 111, 93, 1) 100%
     );
     pointer-events: none;
   }

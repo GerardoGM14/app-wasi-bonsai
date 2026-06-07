@@ -1,0 +1,251 @@
+---
+import { Image } from "astro:assets";
+import imgCliente1 from "../assets/images/cliente1.png";
+import imgCliente2 from "../assets/images/cliente2.png";
+import imgCliente3 from "../assets/images/cliente3.png";
+
+interface Testimonio {
+  img: any;
+  alt: string;
+  name: string;
+  role: string;
+  quote: string; // admite <b>…</b> para resaltar
+}
+
+interface Props {
+  kicker?: string;
+  titleHtml?: string;
+  description?: string;
+  items?: Testimonio[];
+}
+
+const {
+  kicker = "Nuestros clientes",
+  titleHtml = "Lo que dicen quienes ya cultivan con <em>BonsaiPro</em>",
+  description = "¡Gracias a nuestros clientes por la confianza brindada!",
+  items = [
+    {
+      img: imgCliente1,
+      alt: "Mauricio Ortiz",
+      name: "Mauricio Ortiz",
+      role: "Cultiva bonsáis · Lima",
+      quote:
+        '"Antes usaba tierra negra para mis bonsáis pero se morían sin entender porqué. <b>Desde que uso BonsaiPro no tengo problemas de cultivo.</b>"',
+    },
+    {
+      img: imgCliente2,
+      alt: "Brissa Moreno",
+      name: "Brissa Moreno",
+      role: "Bonsáis y suculentas",
+      quote:
+        '"<b>Con BonsaiPro mis plantas crecen más vigorosas y saludables</b> todo el año. Cultivo bonsáis, helechos y suculentas. ¡Súper recomendado!"',
+    },
+    {
+      img: imgCliente3,
+      alt: "Luis Tesén",
+      name: "Luis Tesén",
+      role: "Colección de árboles",
+      quote:
+        '"Mis árboles estaban estancados durante mucho tiempo, <b>ahora que uso BonsaiPro brotan con más fuerza</b> y las raíces crecen como locas."',
+    },
+  ],
+} = Astro.props;
+---
+
+<section id="clientes" class="testimonios">
+  <div class="testimonios-inner">
+    <div class="sec-head">
+      <span class="sec-kicker">{kicker}</span>
+      <h2 class="sec-title" set:html={titleHtml}></h2>
+      {description && <p class="sec-desc">{description}</p>}
+    </div>
+
+    <div class="grid">
+      {
+        items.map((t) => (
+          <article class="card">
+            <div class="photo">
+              <Image src={t.img} alt={t.alt} width={400} height={400} class="card-photo-img" />
+            </div>
+            <div class="body">
+              <div class="stars" aria-label="5 de 5 estrellas">★★★★★</div>
+              <p class="quote" set:html={t.quote} />
+              <div class="who">
+                <div class="name">{t.name}</div>
+                <div class="role">{t.role}</div>
+              </div>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .testimonios {
+    --sand: #E1D7D1; /* Adaptado al color de fondo de la web */
+    --cream: #faf6ee;
+    --bark: #3c3225;
+    --bark-soft: #5b4f3f;
+    --muted: #948674;
+    --line: rgba(60, 50, 37, 0.12);
+    --terra: #be6a46;
+    --terra-deep: #a2542f;
+    --shadow: 0 18px 40px -22px rgba(60, 42, 25, 0.45);
+    --font: "Asap", system-ui, sans-serif;
+
+    font-family: var(--font);
+    background: var(--sand);
+    color: var(--bark);
+    -webkit-font-smoothing: antialiased;
+    padding: 70px 24px 100px;
+  }
+  .testimonios-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  .testimonios * {
+    box-sizing: border-box;
+  }
+
+  /* Encabezado */
+  .sec-head {
+    max-width: 720px;
+    margin: 0 0 44px;
+    text-align: left;
+  }
+  .sec-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #a8701f;
+    margin-bottom: 12px;
+  }
+  .sec-kicker::before {
+    content: "";
+    width: 26px;
+    height: 2px;
+    background: #a8701f;
+    border-radius: 2px;
+  }
+  .sec-title {
+    font-family: 'Inter Tight', 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.6rem, 2.2vw + 1rem, 2rem);
+    color: #3d2a18;
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+    text-wrap: pretty;
+  }
+  .sec-title :global(em) {
+    font-style: normal;
+    font-weight: 700;
+    color: #a8701f;
+  }
+  .sec-desc {
+    margin-top: 14px;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-size: 15.5px;
+    line-height: 1.55;
+    color: #6b574a;
+    text-wrap: pretty;
+  }
+
+  /* Estrellas */
+  .stars {
+    color: var(--terra);
+    font-size: 15px;
+    letter-spacing: 3px;
+    line-height: 1;
+  }
+
+  /* Grilla de tarjetas */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+  .card {
+    background: var(--cream);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition:
+      transform 0.35s cubic-bezier(0.2, 0.7, 0.3, 1),
+      box-shadow 0.35s;
+  }
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow);
+  }
+  .card .photo {
+    position: relative;
+    height: 280px;
+    overflow: hidden;
+  }
+  .card .photo :global(.card-photo-img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+  }
+  .card .photo::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 55%, rgba(60, 50, 37, 0.18));
+  }
+  .card .body {
+    padding: 24px 24px 26px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+  .card .quote {
+    font-size: 16.5px;
+    line-height: 1.6;
+    color: var(--bark);
+    margin: 14px 0 22px;
+    flex: 1;
+  }
+  .card .quote :global(b) {
+    font-weight: 700;
+    color: var(--bark);
+    background: linear-gradient(transparent 62%, rgba(190, 106, 70, 0.22) 0);
+  }
+  .card .who {
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+  }
+  .card .who .name {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--bark);
+  }
+  .card .who .role {
+    font-size: 12.5px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  @media (max-width: 880px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+    .testimonios {
+      padding: 40px 24px 70px;
+    }
+    .sec-title {
+      font-size: 30px;
+    }
+  }
+</style>
