@@ -146,7 +146,6 @@ const {
     <div class="wb-modal" data-panel="tc" hidden>
       <div class="wb-modal-head">
         <div>
-          <div class="wb-modal-eyebrow">Legal</div>
           <h3 class="wb-modal-title">Términos y condiciones</h3>
         </div>
         <button
@@ -232,7 +231,7 @@ const {
           asimismo incluyendo, sin ser esta lista exhaustiva, información, texto,
           software, diseños, dibujos, fotos y gráficas (en adelante el
           “Contenido”). Tanto el Contenido de WasiBonsai.pe, como la
-          organización, disposición, arreglo y diseño de los elements presentes
+          organización, disposición, arreglo y diseño de los elementos presentes
           en la misma y en cada una de sus páginas, son propiedad de WasiBonsai
           (o son materiales respecto de los cuales WasiBonsai cuenta con los
           permisos y/o licencias de los titulares de derechos) y están
@@ -273,10 +272,10 @@ const {
           <strong>SETIMO: Despachos y condiciones de entrega.</strong><br />
           Una vez completada la transacción de compra, se reenviará el formulario
           de compra y el comprobante de pago al correo electrónico y número de
-          WhatsApp del usuario. WasiBonsai hará los mayores esfuerzos por entregar
+          Whatsapp del usuario. WasiBonsai hará los mayores esfuerzos por entregar
           los productos lo antes posible, en los plazos y costos estipulados.<br />
           Los horarios de entrega son de 8 am a 8 pm y se podrá coordinar un
-          rango más preciso mediante el contacto de WhatsApp de WasiBonsai. Es
+          rango más preciso mediante el contacto de Whatsapp de WasiBonsai. Es
           responsabilidad del Usuario que los datos relativos al despacho sean
           correctamente proporcionados. Será responsabilidad del Usuario informar
           el cambio del domicilio proporcionado por éste al momento de la compra,
@@ -371,7 +370,6 @@ const {
     <div class="wb-modal" data-panel="pp" hidden>
       <div class="wb-modal-head">
         <div>
-          <div class="wb-modal-eyebrow">Legal</div>
           <h3 class="wb-modal-title">Política de privacidad y cookies</h3>
         </div>
         <button
@@ -722,7 +720,9 @@ const {
     width: 100%;
     max-width: 640px;
     max-height: 84vh;
-    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
     background: #f6f1e8;
     border-radius: 22px;
     box-shadow: 0 36px 90px rgba(0, 0, 0, 0.5);
@@ -733,8 +733,7 @@ const {
   }
 
   .wb-modal-head {
-    position: sticky;
-    top: 0;
+    flex: none;
     background: #f6f1e8;
     padding: 28px 32px 18px;
     display: flex;
@@ -777,6 +776,8 @@ const {
   }
 
   .wb-modal-body {
+    flex: 1;
+    overflow-y: auto;
     padding: 22px 32px 32px;
     color: #6f5e4c;
     font-size: 14.5px;
