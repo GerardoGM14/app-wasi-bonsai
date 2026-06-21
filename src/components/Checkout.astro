@@ -448,13 +448,12 @@ const itemCount = productos.reduce((a, p) => a + p.cantidad, 0);
   
   .ck-toast {
     position: fixed;
-    top: 24px;
+    bottom: 24px;
     right: 24px;
     background: #cf2a2a;
     color: #fff7ec;
     padding: 14px 20px;
     border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(207, 42, 42, 0.25);
     z-index: 200;
     font-family: "Hanken Grotesk", sans-serif;
     font-weight: 600;
@@ -463,7 +462,7 @@ const itemCount = productos.reduce((a, p) => a + p.cantidad, 0);
     animation: ckFadeIn 250ms ease forwards, ckSlideUp 250ms ease forwards;
   }
   .ck-toast.hidden { display: none !important; }
-  .ck-toast.success { background: #1e3a1e; box-shadow: 0 10px 30px rgba(30, 58, 30, 0.25); }
+  .ck-toast.success { background: #1e3a1e; }
 
   @keyframes ckSlideUp {
     from { transform: translateY(20px); }
