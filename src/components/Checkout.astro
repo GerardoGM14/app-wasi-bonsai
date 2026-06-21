@@ -159,11 +159,11 @@ const itemCount = productos.reduce((a, p) => a + p.cantidad, 0);
         <div class="ck-grid-2">
           <label class="ck-field">
             <span class="ck-label">Nombre y apellido <span class="ck-req">*</span></span>
-            <input type="text" class="ck-input" placeholder="Tu nombre completo" />
+            <input type="text" data-field="nombre" class="ck-input" placeholder="Tu nombre completo" />
           </label>
           <label class="ck-field">
             <span class="ck-label">DNI / CE <span class="ck-req">*</span></span>
-            <input type="text" class="ck-input" placeholder="00000000" />
+            <input type="text" data-field="dni" class="ck-input" placeholder="00000000" />
           </label>
         </div>
 
@@ -171,11 +171,11 @@ const itemCount = productos.reduce((a, p) => a + p.cantidad, 0);
         <div class="ck-grid-2 ck-mb-lg">
           <label class="ck-field">
             <span class="ck-label">Correo <span class="ck-req">*</span></span>
-            <input type="email" class="ck-input" placeholder="tucorreo@gmail.com" />
+            <input type="email" data-field="correo" class="ck-input" placeholder="tucorreo@gmail.com" />
           </label>
           <label class="ck-field">
             <span class="ck-label">Celular <span class="ck-req">*</span></span>
-            <input type="tel" class="ck-input" placeholder="9 dígitos" />
+            <input type="tel" data-field="celular" class="ck-input" placeholder="9 dígitos" />
           </label>
         </div>
 
@@ -189,11 +189,11 @@ const itemCount = productos.reduce((a, p) => a + p.cantidad, 0);
           <div class="ck-grid-2">
             <label class="ck-field">
               <span class="ck-label" data-doc-label>Nombre y apellido <span class="ck-req">*</span></span>
-              <input type="text" class="ck-input" />
+              <input type="text" data-field="doc-nombre" class="ck-input" />
             </label>
             <label class="ck-field">
               <span class="ck-label" data-doc-id-label>DNI <span class="ck-req">*</span></span>
-              <input type="text" class="ck-input" />
+              <input type="text" data-field="doc-id" class="ck-input" />
             </label>
           </div>
           <div class="ck-obligatorio">* Dato obligatorio</div>
@@ -271,6 +271,7 @@ const itemCount = productos.reduce((a, p) => a + p.cantidad, 0);
       </div>
     </div>
   </div>
+  <div id="validation-toast" class="ck-toast hidden"></div>
 </div>
 
 <style>
@@ -441,6 +442,32 @@ const itemCount = productos.reduce((a, p) => a + p.cantidad, 0);
   }
   @media (max-width: 560px) {
     .ck-grid-3, .ck-grid-2 { grid-template-columns: 1fr; }
+  }
+
+  .ck-input.is-invalid, .ck-dd.is-invalid .ck-dd-trigger { border-color: #cf2a2a !important; background: #fff3f3 !important; }
+  
+  .ck-toast {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    background: #cf2a2a;
+    color: #fff7ec;
+    padding: 14px 20px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(207, 42, 42, 0.25);
+    z-index: 200;
+    font-family: "Hanken Grotesk", sans-serif;
+    font-weight: 600;
+    font-size: 13.5px;
+    cursor: pointer;
+    animation: ckFadeIn 250ms ease forwards, ckSlideUp 250ms ease forwards;
+  }
+  .ck-toast.hidden { display: none !important; }
+  .ck-toast.success { background: #1e3a1e; box-shadow: 0 10px 30px rgba(30, 58, 30, 0.25); }
+
+  @keyframes ckSlideUp {
+    from { transform: translateY(20px); }
+    to { transform: translateY(0); }
   }
 </style>
 
@@ -733,6 +760,191 @@ const itemCount = productos.reduce((a, p) => a + p.cantidad, 0);
         if (e.target === qrModal) {
           closeModal();
         }
+      });
+    }
+
+    // ---- Toast alerts ----
+    function showToast(message: string, type: 'error' | 'success' = 'error') {
+      const toast = root.querySelector('#validation-toast') as HTMLElement;
+      if (!toast) return;
+      toast.textContent = message;
+      toast.className = 'ck-toast' + (type === 'success' ? ' success' : '');
+      toast.classList.remove('hidden');
+      
+      if ((window as any).toastTimeout) {
+        clearTimeout((window as any).toastTimeout);
+      }
+      (window as any).toastTimeout = setTimeout(() => {
+        toast.classList.add('hidden');
+      }, 3500);
+    }
+
+    const toastEl = root.querySelector('#validation-toast') as HTMLElement;
+    if (toastEl) {
+      toastEl.addEventListener('click', () => toastEl.classList.add('hidden'));
+    }
+
+    // ---- Clear validation on input ----
+    root.querySelectorAll('.ck-input').forEach((input) => {
+      const htmlInput = input as HTMLInputElement;
+      htmlInput.addEventListener('input', () => {
+        htmlInput.classList.remove('is-invalid');
+      });
+    });
+
+    // Remove is-invalid from dropdown when selected
+    const ddsKeys = ['dep', 'prov', 'dist'];
+    ddsKeys.forEach((key) => {
+      const dd = dds[key];
+      if (dd) {
+        dd.addEventListener('click', () => {
+          dd.classList.remove('is-invalid');
+        });
+      }
+    });
+
+    // ---- Celular restriction: digits only, max 9, starts with 9 ----
+    const celularInput = root.querySelector('[data-field="celular"]') as HTMLInputElement;
+    if (celularInput) {
+      celularInput.addEventListener('input', () => {
+        let val = celularInput.value.replace(/\D/g, ''); // strip non-digits
+        if (val.length > 9) {
+          val = val.substring(0, 9);
+        }
+        celularInput.value = val;
+      });
+    }
+
+    // ---- Send WhatsApp Order ----
+    function sendWhatsAppOrder() {
+      const nombre = (root.querySelector('[data-field="nombre"]') as HTMLInputElement)?.value || '';
+      const dni = (root.querySelector('[data-field="dni"]') as HTMLInputElement)?.value || '';
+      const correo = (root.querySelector('[data-field="correo"]') as HTMLInputElement)?.value || '';
+      const celular = (root.querySelector('[data-field="celular"]') as HTMLInputElement)?.value || '';
+      const docNombre = (root.querySelector('[data-field="doc-nombre"]') as HTMLInputElement)?.value || '';
+      const docId = (root.querySelector('[data-field="doc-id"]') as HTMLInputElement)?.value || '';
+
+      const itemsText = Object.keys(state.qty)
+        .filter(id => state.qty[id] > 0)
+        .map(id => {
+          const name = id === 'promo' ? 'Promo 3x2' : 'Unidad Bonsai Pro';
+          return `- ${name}: ${state.qty[id]} u.`;
+        })
+        .join('\n');
+
+      const text = `*Nuevo Pedido Wasi Bonsai*\n\n` +
+        `*Detalle del pedido:*\n${itemsText}\n\n` +
+        `*Datos de entrega:*\n` +
+        `- Departamento: ${state.dep}\n` +
+        `- Provincia: ${state.prov}\n` +
+        `- Distrito: ${state.dist}\n` +
+        `- Nombre: ${nombre}\n` +
+        `- DNI / CE: ${dni}\n` +
+        `- Correo: ${correo}\n` +
+        `- Celular: ${celular}\n\n` +
+        `*Comprobante (${state.doc === 'factura' ? 'Factura' : 'Boleta'}):*\n` +
+        `- ${state.doc === 'factura' ? 'Razón Social' : 'Nombre'}: ${docNombre}\n` +
+        `- ${state.doc === 'factura' ? 'RUC' : 'DNI'}: ${docId}\n\n` +
+        `*Método de Pago:*\n- ${state.pay === 'yape' ? 'Yape / Plin' : 'Transferencia BCP'}`;
+
+      const phone = "51918574506"; // Wasi Bonsai business number
+      const url = `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(text)}`;
+      window.open(url, '_blank');
+    }
+
+    // ---- Submit Button Validation ----
+    const buyBtn = root.querySelector('.ck-buy') as HTMLElement;
+    if (buyBtn) {
+      buyBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        // Reset previous validation borders
+        root.querySelectorAll('.is-invalid').forEach((el) => el.classList.remove('is-invalid'));
+
+        let isValid = true;
+        let errMsg = '';
+
+        // 1. Validate cascade location dropdowns
+        if (!state.dep) {
+          dds['dep']?.classList.add('is-invalid');
+          if (isValid) { errMsg = 'Por favor, selecciona un departamento.'; isValid = false; }
+        }
+        if (state.dep && !state.prov) {
+          dds['prov']?.classList.add('is-invalid');
+          if (isValid) { errMsg = 'Por favor, selecciona una provincia.'; isValid = false; }
+        }
+        if (state.prov && !state.dist) {
+          dds['dist']?.classList.add('is-invalid');
+          if (isValid) { errMsg = 'Por favor, selecciona un distrito.'; isValid = false; }
+        }
+
+        // 2. Validate personal info
+        const nombreInput = root.querySelector('[data-field="nombre"]') as HTMLInputElement;
+        const dniInput = root.querySelector('[data-field="dni"]') as HTMLInputElement;
+        const correoInput = root.querySelector('[data-field="correo"]') as HTMLInputElement;
+        const celularInput = root.querySelector('[data-field="celular"]') as HTMLInputElement;
+
+        if (nombreInput && !nombreInput.value.trim()) {
+          nombreInput.classList.add('is-invalid');
+          if (isValid) { errMsg = 'Por favor, ingresa tu nombre y apellido.'; isValid = false; }
+        }
+        if (dniInput && !dniInput.value.trim()) {
+          dniInput.classList.add('is-invalid');
+          if (isValid) { errMsg = 'Por favor, ingresa tu DNI / CE.'; isValid = false; }
+        }
+        if (correoInput) {
+          const val = correoInput.value.trim();
+          if (!val) {
+            correoInput.classList.add('is-invalid');
+            if (isValid) { errMsg = 'Por favor, ingresa tu correo.'; isValid = false; }
+          } else if (!val.includes('@')) {
+            correoInput.classList.add('is-invalid');
+            if (isValid) { errMsg = 'El correo electrónico debe contener "@".'; isValid = false; }
+          }
+        }
+        if (celularInput) {
+          const val = celularInput.value.trim();
+          if (!val) {
+            celularInput.classList.add('is-invalid');
+            if (isValid) { errMsg = 'Por favor, ingresa tu número de celular.'; isValid = false; }
+          } else if (val.length !== 9 || !val.startsWith('9')) {
+            celularInput.classList.add('is-invalid');
+            if (isValid) { errMsg = 'El celular debe tener exactamente 9 dígitos y empezar con 9.'; isValid = false; }
+          }
+        }
+
+        // 3. Validate comprobante info
+        const docNombreInput = root.querySelector('[data-field="doc-nombre"]') as HTMLInputElement;
+        const docIdInput = root.querySelector('[data-field="doc-id"]') as HTMLInputElement;
+
+        if (docNombreInput && !docNombreInput.value.trim()) {
+          docNombreInput.classList.add('is-invalid');
+          if (isValid) {
+            errMsg = state.doc === 'factura'
+              ? 'Por favor, ingresa la razón social para la factura.'
+              : 'Por favor, ingresa tu nombre y apellido para la boleta.';
+            isValid = false;
+          }
+        }
+        if (docIdInput && !docIdInput.value.trim()) {
+          docIdInput.classList.add('is-invalid');
+          if (isValid) {
+            errMsg = state.doc === 'factura'
+              ? 'Por favor, ingresa el RUC para la factura.'
+              : 'Por favor, ingresa el DNI para la boleta.';
+            isValid = false;
+          }
+        }
+
+        if (!isValid) {
+          showToast(errMsg, 'error');
+          return;
+        }
+
+        showToast('¡Validación correcta! Redirigiendo a WhatsApp...', 'success');
+        setTimeout(() => {
+          sendWhatsAppOrder();
+        }, 1200);
       });
     }
 
