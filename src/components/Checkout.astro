@@ -1,7 +1,11 @@
 ---
 // Checkout.astro — Vista "Finaliza tu compra" Wasi Bonsai / BonsaiPro
 // Uso: import Checkout from "../components/Checkout.astro"; luego <Checkout />
+
+import { Image } from "astro:assets";
+import qrYape from "../assets/images/QR_Yape.png";
 //
+
 // Fuentes: carga Poppins, Hanken Grotesk y Space Mono desde Google Fonts.
 // Si ya las cargas en tu Layout, borra el bloque <link> de abajo.
 //
@@ -231,7 +235,7 @@ const itemCount = productos.reduce((a, p) => a + p.cantidad, 0);
               </div>
             </div>
             <div class="ck-qr" data-qr>
-              <svg width="58" height="58" viewBox="0 0 24 24" fill="none" stroke="#6f5e4c" stroke-width="1.4"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3M20 14v.01M14 20h.01M17 20h.01M20 17v4" stroke-linecap="round"/></svg>
+              <Image src={qrYape} alt="QR Yape" class="ck-qr-img" width={68} height={68} />
             </div>
           </div>
 
@@ -253,27 +257,27 @@ const itemCount = productos.reduce((a, p) => a + p.cantidad, 0);
 </div>
 
 <style>
-  .ck-page { background: #e7ddcf; font-family: "Hanken Grotesk", system-ui, sans-serif; padding: 100px 24px 60px; }
+  .ck-page { background: #e7ddcf; font-family: "Hanken Grotesk", system-ui, sans-serif; padding: 90px 24px 40px; }
   .ck-page * { box-sizing: border-box; }
-  .ck-card { width: 100%; max-width: 1240px; margin: 0 auto; background: #f3ede3; border: 1px solid rgba(120,96,70,0.16); border-radius: 16px; overflow: hidden; }
+  .ck-card { width: 100%; max-width: 1380px; margin: 0 auto; background: #f3ede3; border: 1px solid rgba(120,96,70,0.16); border-radius: 16px; overflow: hidden; }
 
   /* Header */
-  .ck-header { padding: 28px 34px; background: #ece4d7; border-bottom: 1px solid rgba(120,96,70,0.12); }
-  .ck-h1 { font-family: "Poppins", sans-serif; font-weight: 700; font-size: 26px; color: #36281c; margin: 0; letter-spacing: -0.4px; }
-  .ck-sub { font-size: 14px; color: #8c7d6c; margin: 7px 0 0; }
+  .ck-header { padding: 18px 28px; background: #ece4d7; border-bottom: 1px solid rgba(120,96,70,0.12); }
+  .ck-h1 { font-family: "Poppins", sans-serif; font-weight: 700; font-size: 24px; color: #36281c; margin: 0; letter-spacing: -0.4px; }
+  .ck-sub { font-size: 13.5px; color: #8c7d6c; margin: 4px 0 0; }
 
   /* Body */
-  .ck-body { display: grid; grid-template-columns: 310px 1fr 340px; }
+  .ck-body { display: grid; grid-template-columns: 320px 1fr 350px; }
 
   /* Labels */
-  .ck-label { display: block; font-family: "Hanken Grotesk", sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.8px; text-transform: uppercase; color: #a8957f; margin-bottom: 7px; }
-  .ck-section-label { font-family: "Hanken Grotesk", sans-serif; font-weight: 600; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: #a8957f; margin-bottom: 22px; }
+  .ck-label { display: block; font-family: "Hanken Grotesk", sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.8px; text-transform: uppercase; color: #a8957f; margin-bottom: 6px; }
+  .ck-section-label { font-family: "Hanken Grotesk", sans-serif; font-weight: 600; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: #a8957f; margin-bottom: 16px; }
   .ck-req { color: #cf6f1f; }
   .ck-mono { font-family: "Space Mono", monospace; }
 
   /* Cart */
-  .ck-cart { padding: 30px 24px 32px; background: #efe7da; border-right: 1px solid rgba(120,96,70,0.12); }
-  .ck-items { display: flex; flex-direction: column; gap: 22px; padding-bottom: 24px; border-bottom: 1px solid rgba(120,96,70,0.12); }
+  .ck-cart { padding: 22px 20px 22px; background: #efe7da; border-right: 1px solid rgba(120,96,70,0.12); }
+  .ck-items { display: flex; flex-direction: column; gap: 14px; padding-bottom: 16px; border-bottom: 1px solid rgba(120,96,70,0.12); }
   .ck-item { display: flex; align-items: center; gap: 14px; }
   .ck-thumb { flex: none; width: 56px; height: 56px; border-radius: 12px; background: #e3d8c6; display: grid; place-items: center; color: #9a7f5f; }
   .ck-item-info { flex: 1; min-width: 0; }
@@ -288,39 +292,39 @@ const itemCount = productos.reduce((a, p) => a + p.cantidad, 0);
   .ck-step-plus:hover { background: #b85f15; }
   .ck-qty { font-family: "Space Mono", monospace; font-weight: 700; font-size: 13px; color: #36281c; min-width: 14px; text-align: center; }
 
-  .ck-summary { margin-top: 24px; display: flex; flex-direction: column; gap: 13px; }
+  .ck-summary { margin-top: 18px; display: flex; flex-direction: column; gap: 10px; }
   .ck-sum-row { display: flex; justify-content: space-between; align-items: baseline; font-size: 14px; color: #7a6a58; }
   .ck-strong { color: #4a3a2a; }
   .ck-envio { font-size: 13px; color: #a8957f; }
-  .ck-total-row { display: flex; justify-content: space-between; align-items: baseline; padding-top: 14px; margin-top: 4px; border-top: 1px solid rgba(120,96,70,0.12); }
+  .ck-total-row { display: flex; justify-content: space-between; align-items: baseline; padding-top: 12px; margin-top: 4px; border-top: 1px solid rgba(120,96,70,0.12); }
   .ck-total-label { font-family: "Poppins", sans-serif; font-weight: 700; font-size: 16px; color: #36281c; }
   .ck-total-igv { font-family: "Space Mono", monospace; font-size: 10px; color: #a8957f; letter-spacing: 0.5px; }
   .ck-total-amt { font-family: "Poppins", sans-serif; font-weight: 800; font-size: 24px; color: #c2691c; }
 
   /* Form */
-  .ck-form { padding: 30px 30px 34px; }
-  .ck-h2 { font-family: "Poppins", sans-serif; font-weight: 700; font-size: 19px; color: #36281c; margin: 0 0 8px; letter-spacing: -0.2px; }
-  .ck-form-note { font-size: 13.5px; line-height: 1.55; color: #8c7d6c; margin: 0 0 24px; max-width: 560px; }
-  .ck-block { margin-bottom: 20px; }
-  .ck-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-bottom: 16px; }
-  .ck-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
-  .ck-mb-lg { margin-bottom: 24px; }
-  .ck-mb-md { margin-bottom: 16px; }
+  .ck-form { padding: 22px 26px 22px; }
+  .ck-h2 { font-family: "Poppins", sans-serif; font-weight: 700; font-size: 18px; color: #36281c; margin: 0 0 6px; letter-spacing: -0.2px; }
+  .ck-form-note { font-size: 13.5px; line-height: 1.5; color: #8c7d6c; margin: 0 0 16px; max-width: 560px; }
+  .ck-block { margin-bottom: 14px; }
+  .ck-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-bottom: 12px; }
+  .ck-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 12px; }
+  .ck-mb-lg { margin-bottom: 16px; }
+  .ck-mb-md { margin-bottom: 14px; }
   .ck-field { display: block; }
 
-  .ck-input { width: 100%; box-sizing: border-box; font-family: "Hanken Grotesk", sans-serif; font-size: 14px; color: #4a3a2a; background: #fbf8f2; border: 1px solid rgba(120,96,70,0.2); border-radius: 10px; padding: 11px 13px; outline: none; transition: border-color 160ms; }
+  .ck-input { width: 100%; box-sizing: border-box; font-family: "Hanken Grotesk", sans-serif; font-size: 14px; color: #4a3a2a; background: #fbf8f2; border: 1px solid rgba(120,96,70,0.2); border-radius: 10px; padding: 10px 12px; outline: none; transition: border-color 160ms; }
   .ck-input:focus { border-color: #cf6f1f; }
   .ck-input::placeholder { color: #b6a48f; }
 
   /* Segmented */
   .ck-seg { display: inline-flex; flex-wrap: wrap; gap: 6px; background: #ece4d7; border-radius: 12px; padding: 5px; }
-  .ck-seg-btn { all: unset; cursor: pointer; white-space: nowrap; font-size: 13.5px; font-weight: 600; padding: 9px 18px; border-radius: 8px; color: #8a7565; transition: background 180ms, color 180ms; }
-  .ck-seg-wide { padding: 9px 26px; }
+  .ck-seg-btn { all: unset; cursor: pointer; white-space: nowrap; font-size: 13.5px; font-weight: 600; padding: 8px 16px; border-radius: 8px; color: #8a7565; transition: background 180ms, color 180ms; }
+  .ck-seg-wide { padding: 8px 24px; }
   .ck-seg-btn.is-active { background: #cf6f1f; color: #fff7ec; }
 
   /* Dropdowns */
   .ck-dd { position: relative; }
-  .ck-dd-trigger { all: unset; cursor: pointer; box-sizing: border-box; width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 8px; font-family: "Hanken Grotesk", sans-serif; font-size: 14px; color: #4a3a2a; background: #fbf8f2; border: 1px solid rgba(120,96,70,0.2); border-radius: 10px; padding: 11px 13px; transition: border-color 160ms; }
+  .ck-dd-trigger { all: unset; cursor: pointer; box-sizing: border-box; width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 8px; font-family: "Hanken Grotesk", sans-serif; font-size: 14px; color: #4a3a2a; background: #fbf8f2; border: 1px solid rgba(120,96,70,0.2); border-radius: 10px; padding: 10px 12px; transition: border-color 160ms; }
   .ck-dd-value { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .ck-dd-value.is-placeholder { color: #b6a48f; }
   .ck-dd-chev { flex: none; transition: transform 200ms; }
@@ -331,22 +335,22 @@ const itemCount = productos.reduce((a, p) => a + p.cantidad, 0);
 
   .ck-dd-panel { display: none; position: absolute; left: 0; right: 0; top: calc(100% + 6px); z-index: 30; max-height: 240px; overflow-y: auto; background: #fbf8f2; border: 1px solid #cf6f1f; border-radius: 10px; padding: 5px; }
   .ck-dd.is-open .ck-dd-panel { display: block; }
-  .ck-dd-opt { all: unset; cursor: pointer; box-sizing: border-box; display: block; width: 100%; font-family: "Hanken Grotesk", sans-serif; font-size: 13.5px; color: #4a3a2a; padding: 8px 11px; border-radius: 7px; transition: background 130ms; }
-  .ck-dd-opt:hover { background: #f0e3d3; }
-  .ck-dd-opt.is-selected { background: #f4e2cf; color: #c2691c; }
+  :global(.ck-dd-opt) { all: unset !important; cursor: pointer !important; box-sizing: border-box !important; display: block !important; width: 100% !important; font-family: "Hanken Grotesk", sans-serif !important; font-size: 13.5px !important; color: #4a3a2a !important; padding: 8px 11px !important; border-radius: 7px !important; text-align: left !important; transition: background 130ms !important; }
+  :global(.ck-dd-opt:hover) { background: #f0e3d3 !important; color: #36281c !important; }
+  :global(.ck-dd-opt.is-selected) { background: #f4e2cf !important; color: #c2691c !important; }
 
-  .ck-comprobante { padding-top: 22px; border-top: 1px solid rgba(120,96,70,0.12); }
-  .ck-obligatorio { font-family: "Space Mono", monospace; font-size: 11px; color: #b3a48f; margin-top: 14px; }
+  .ck-comprobante { padding-top: 16px; border-top: 1px solid rgba(120,96,70,0.12); }
+  .ck-obligatorio { font-family: "Space Mono", monospace; font-size: 11px; color: #b3a48f; margin-top: 10px; }
 
   /* Payment column (previously footer) */
-  .ck-payment { padding: 30px 24px 32px; background: #efe7da; border-left: 1px solid rgba(120,96,70,0.12); }
-  .ck-foot-head { display: flex; flex-direction: column; gap: 4px; margin-bottom: 20px; }
+  .ck-payment { padding: 22px 20px 22px; background: #efe7da; border-left: 1px solid rgba(120,96,70,0.12); }
+  .ck-foot-head { display: flex; flex-direction: column; gap: 4px; margin-bottom: 14px; }
   .ck-foot-title { font-family: "Poppins", sans-serif; font-weight: 700; font-size: 15px; color: #36281c; }
   .ck-foot-total { font-family: "Poppins", sans-serif; font-weight: 800; font-size: 24px; color: #c2691c; }
 
-  .ck-pay { display: flex; flex-direction: column; gap: 18px; }
-  .ck-pay-methods { display: flex; flex-direction: column; gap: 10px; width: 100%; }
-  .ck-pay-method { all: unset; cursor: pointer; box-sizing: border-box; display: flex; align-items: center; gap: 11px; padding: 12px 14px; border-radius: 12px; background: transparent; border: 1.5px solid rgba(120,96,70,0.2); transition: background 160ms, border-color 160ms; }
+  .ck-pay { display: flex; flex-direction: column; gap: 12px; }
+  .ck-pay-methods { display: flex; flex-direction: column; gap: 8px; width: 100%; }
+  .ck-pay-method { all: unset; cursor: pointer; box-sizing: border-box; display: flex; align-items: center; gap: 11px; padding: 10px 12px; border-radius: 12px; background: transparent; border: 1.5px solid rgba(120,96,70,0.2); transition: background 160ms, border-color 160ms; }
   .ck-pay-method.is-active { background: #fff7ee; border-color: #cf6f1f; }
   .ck-radio { width: 22px; height: 22px; border-radius: 50%; border: 2px solid rgba(120,96,70,0.35); display: grid; place-items: center; transition: border-color 160ms; }
   .ck-pay-method.is-active .ck-radio { border-color: #cf6f1f; }
@@ -354,20 +358,21 @@ const itemCount = productos.reduce((a, p) => a + p.cantidad, 0);
   .ck-pay-method.is-active .ck-radio-dot { background: #cf6f1f; }
   .ck-pay-name { font-family: "Poppins", sans-serif; font-weight: 600; font-size: 14px; color: #36281c; }
 
-  .ck-info { width: 100%; display: flex; align-items: center; gap: 14px; background: #fbf8f2; border: 1px solid rgba(120,96,70,0.16); border-radius: 14px; padding: 14px 16px; }
+  .ck-info { width: 100%; display: flex; align-items: center; gap: 14px; background: #fbf8f2; border: 1px solid rgba(120,96,70,0.16); border-radius: 14px; padding: 10px 12px; }
   .ck-info-text { flex: 1; min-width: 0; }
   .ck-info-block { display: flex; flex-direction: column; gap: 4px; }
   .ck-info-block[hidden] { display: none; }
   .ck-info-eyebrow { font-family: "Space Mono", monospace; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: #a8957f; }
   .ck-info-main { font-family: "Poppins", sans-serif; font-weight: 700; font-size: 18px; color: #36281c; letter-spacing: 0.5px; }
   .ck-info-sub { font-size: 12.5px; color: #8c7d6c; line-height: 1.3; }
-  .ck-qr { flex: none; width: 72px; height: 72px; border-radius: 10px; background: #fff; border: 1px solid rgba(120,96,70,0.16); display: grid; place-items: center; }
+  .ck-qr { flex: none; width: 72px; height: 72px; border-radius: 10px; background: #fff; border: 1px solid rgba(120,96,70,0.16); display: grid; place-items: center; overflow: hidden; }
   .ck-qr[hidden] { display: none; }
+  .ck-qr-img { width: 100%; height: 100%; object-fit: contain; padding: 2px; }
 
-  .ck-actions { display: flex; flex-direction: column; gap: 10px; width: 100%; }
-  .ck-attach { all: unset; cursor: pointer; box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center; gap: 9px; font-family: "Hanken Grotesk", sans-serif; font-weight: 600; font-size: 14px; color: #6f5e4c; background: #fbf8f2; border: 1.5px dashed rgba(120,96,70,0.35); padding: 11px 20px; border-radius: 12px; transition: border-color 160ms, color 160ms; }
+  .ck-actions { display: flex; flex-direction: column; gap: 8px; width: 100%; }
+  .ck-attach { all: unset; cursor: pointer; box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center; gap: 9px; font-family: "Hanken Grotesk", sans-serif; font-weight: 600; font-size: 14px; color: #6f5e4c; background: #fbf8f2; border: 1.5px dashed rgba(120,96,70,0.35); padding: 9px 16px; border-radius: 12px; transition: border-color 160ms, color 160ms; }
   .ck-attach:hover { border-color: #cf6f1f; color: #cf6f1f; }
-  .ck-buy { all: unset; cursor: pointer; box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center; gap: 10px; font-family: "Poppins", sans-serif; font-weight: 700; font-size: 15px; color: #fff7ec; background: #cf6f1f; padding: 14px 28px; border-radius: 12px; transition: background 180ms; }
+  .ck-buy { all: unset; cursor: pointer; box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center; gap: 10px; font-family: "Poppins", sans-serif; font-weight: 700; font-size: 15px; color: #fff7ec; background: #cf6f1f; padding: 12px 22px; border-radius: 12px; transition: background 180ms; }
   .ck-buy:hover { background: #b85f15; }
 
   @media (max-width: 990px) {
