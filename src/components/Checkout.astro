@@ -193,57 +193,59 @@ const itemCount = productos.reduce((a, p) => a + p.cantidad, 0);
           <div class="ck-obligatorio">* Dato obligatorio</div>
         </div>
       </div>
-    </div>
 
-    <!-- Payment footer -->
-    <div class="ck-foot">
-      <div class="ck-foot-head">
-        <span class="ck-foot-title">Adjunta tu comprobante de pago</span>
-        <span class="ck-foot-total" data-total>{money(subtotal)}</span>
-      </div>
+      <!-- Payment -->
+      <div class="ck-payment">
+        <div class="ck-section-label">Pago y Comprobante</div>
 
-      <div class="ck-pay">
-        <!-- Method selector -->
-        <div class="ck-pay-methods">
-          <button type="button" class="ck-pay-method is-active" data-pay="yape">
-            <span class="ck-radio"><span class="ck-radio-dot"></span></span>
-            <span class="ck-pay-name">Yape / Plin</span>
-          </button>
-          <button type="button" class="ck-pay-method" data-pay="transfer">
-            <span class="ck-radio"><span class="ck-radio-dot"></span></span>
-            <span class="ck-pay-name">Transferencia</span>
-          </button>
+        <div class="ck-foot-head">
+          <span class="ck-foot-title">Adjunta tu comprobante de pago</span>
+          <span class="ck-foot-total" data-total>{money(subtotal)}</span>
         </div>
 
-        <!-- Info panel -->
-        <div class="ck-info">
-          <div class="ck-info-text">
-            <div class="ck-info-block" data-info="yape">
-              <div class="ck-info-eyebrow">Yape / Plin</div>
-              <div class="ck-info-main">{yapeNumero}</div>
-              <div class="ck-info-sub">{yapeTitular}</div>
-            </div>
-            <div class="ck-info-block" data-info="transfer" hidden>
-              <div class="ck-info-eyebrow">Cuenta BCP · Soles</div>
-              <div class="ck-info-main">{cuentaBcp}</div>
-              <div class="ck-info-sub">{cciBcp}</div>
-            </div>
+        <div class="ck-pay">
+          <!-- Method selector -->
+          <div class="ck-pay-methods">
+            <button type="button" class="ck-pay-method is-active" data-pay="yape">
+              <span class="ck-radio"><span class="ck-radio-dot"></span></span>
+              <span class="ck-pay-name">Yape / Plin</span>
+            </button>
+            <button type="button" class="ck-pay-method" data-pay="transfer">
+              <span class="ck-radio"><span class="ck-radio-dot"></span></span>
+              <span class="ck-pay-name">Transferencia</span>
+            </button>
           </div>
-          <div class="ck-qr" data-qr>
-            <svg width="58" height="58" viewBox="0 0 24 24" fill="none" stroke="#6f5e4c" stroke-width="1.4"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3M20 14v.01M14 20h.01M17 20h.01M20 17v4" stroke-linecap="round"/></svg>
-          </div>
-        </div>
 
-        <!-- Actions -->
-        <div class="ck-actions">
-          <button type="button" class="ck-attach">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
-            Adjuntar comprobante
-          </button>
-          <button type="button" class="ck-buy">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
-            Comprar ahora
-          </button>
+          <!-- Info panel -->
+          <div class="ck-info">
+            <div class="ck-info-text">
+              <div class="ck-info-block" data-info="yape">
+                <div class="ck-info-eyebrow">Yape / Plin</div>
+                <div class="ck-info-main">{yapeNumero}</div>
+                <div class="ck-info-sub">{yapeTitular}</div>
+              </div>
+              <div class="ck-info-block" data-info="transfer" hidden>
+                <div class="ck-info-eyebrow">Cuenta BCP · Soles</div>
+                <div class="ck-info-main">{cuentaBcp}</div>
+                <div class="ck-info-sub">{cciBcp}</div>
+              </div>
+            </div>
+            <div class="ck-qr" data-qr>
+              <svg width="58" height="58" viewBox="0 0 24 24" fill="none" stroke="#6f5e4c" stroke-width="1.4"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3M20 14v.01M14 20h.01M17 20h.01M20 17v4" stroke-linecap="round"/></svg>
+            </div>
+          </div>
+
+          <!-- Actions -->
+          <div class="ck-actions">
+            <button type="button" class="ck-attach">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
+              Adjuntar comprobante
+            </button>
+            <button type="button" class="ck-buy">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+              Comprar ahora
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -251,9 +253,9 @@ const itemCount = productos.reduce((a, p) => a + p.cantidad, 0);
 </div>
 
 <style>
-  .ck-page { background: #e7ddcf; font-family: "Hanken Grotesk", system-ui, sans-serif; padding: 48px 24px; }
+  .ck-page { background: #e7ddcf; font-family: "Hanken Grotesk", system-ui, sans-serif; padding: 100px 24px 60px; }
   .ck-page * { box-sizing: border-box; }
-  .ck-card { width: 100%; max-width: 1120px; margin: 0 auto; background: #f3ede3; border: 1px solid rgba(120,96,70,0.16); border-radius: 16px; overflow: hidden; }
+  .ck-card { width: 100%; max-width: 1240px; margin: 0 auto; background: #f3ede3; border: 1px solid rgba(120,96,70,0.16); border-radius: 16px; overflow: hidden; }
 
   /* Header */
   .ck-header { padding: 28px 34px; background: #ece4d7; border-bottom: 1px solid rgba(120,96,70,0.12); }
@@ -261,7 +263,7 @@ const itemCount = productos.reduce((a, p) => a + p.cantidad, 0);
   .ck-sub { font-size: 14px; color: #8c7d6c; margin: 7px 0 0; }
 
   /* Body */
-  .ck-body { display: grid; grid-template-columns: 372px 1fr; }
+  .ck-body { display: grid; grid-template-columns: 310px 1fr 340px; }
 
   /* Labels */
   .ck-label { display: block; font-family: "Hanken Grotesk", sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.8px; text-transform: uppercase; color: #a8957f; margin-bottom: 7px; }
@@ -270,33 +272,33 @@ const itemCount = productos.reduce((a, p) => a + p.cantidad, 0);
   .ck-mono { font-family: "Space Mono", monospace; }
 
   /* Cart */
-  .ck-cart { padding: 30px 30px 32px; background: #efe7da; border-right: 1px solid rgba(120,96,70,0.12); }
+  .ck-cart { padding: 30px 24px 32px; background: #efe7da; border-right: 1px solid rgba(120,96,70,0.12); }
   .ck-items { display: flex; flex-direction: column; gap: 22px; padding-bottom: 24px; border-bottom: 1px solid rgba(120,96,70,0.12); }
-  .ck-item { display: flex; align-items: center; gap: 16px; }
-  .ck-thumb { flex: none; width: 64px; height: 64px; border-radius: 12px; background: #e3d8c6; display: grid; place-items: center; color: #9a7f5f; }
+  .ck-item { display: flex; align-items: center; gap: 14px; }
+  .ck-thumb { flex: none; width: 56px; height: 56px; border-radius: 12px; background: #e3d8c6; display: grid; place-items: center; color: #9a7f5f; }
   .ck-item-info { flex: 1; min-width: 0; }
-  .ck-item-name { font-family: "Poppins", sans-serif; font-weight: 600; font-size: 15px; color: #36281c; }
-  .ck-item-price { font-family: "Space Mono", monospace; font-size: 12px; color: #a8957f; margin-top: 2px; }
+  .ck-item-name { font-family: "Poppins", sans-serif; font-weight: 600; font-size: 14px; color: #36281c; }
+  .ck-item-price { font-family: "Space Mono", monospace; font-size: 11px; color: #a8957f; margin-top: 2px; }
 
-  .ck-stepper { display: flex; align-items: center; gap: 8px; background: #fbf8f2; border: 1px solid rgba(120,96,70,0.18); border-radius: 999px; padding: 4px; }
-  .ck-step-btn { all: unset; cursor: pointer; width: 26px; height: 26px; display: grid; place-items: center; border-radius: 50%; transition: background 160ms; }
+  .ck-stepper { display: flex; align-items: center; gap: 6px; background: #fbf8f2; border: 1px solid rgba(120,96,70,0.18); border-radius: 999px; padding: 3px; }
+  .ck-step-btn { all: unset; cursor: pointer; width: 22px; height: 22px; display: grid; place-items: center; border-radius: 50%; transition: background 160ms; }
   .ck-step-minus { color: #8a7565; }
   .ck-step-minus:hover { background: rgba(120,96,70,0.1); }
   .ck-step-plus { background: #cf6f1f; color: #fff7ec; }
   .ck-step-plus:hover { background: #b85f15; }
-  .ck-qty { font-family: "Space Mono", monospace; font-weight: 700; font-size: 14px; color: #36281c; min-width: 16px; text-align: center; }
+  .ck-qty { font-family: "Space Mono", monospace; font-weight: 700; font-size: 13px; color: #36281c; min-width: 14px; text-align: center; }
 
   .ck-summary { margin-top: 24px; display: flex; flex-direction: column; gap: 13px; }
-  .ck-sum-row { display: flex; justify-content: space-between; align-items: baseline; font-size: 14.5px; color: #7a6a58; }
+  .ck-sum-row { display: flex; justify-content: space-between; align-items: baseline; font-size: 14px; color: #7a6a58; }
   .ck-strong { color: #4a3a2a; }
   .ck-envio { font-size: 13px; color: #a8957f; }
   .ck-total-row { display: flex; justify-content: space-between; align-items: baseline; padding-top: 14px; margin-top: 4px; border-top: 1px solid rgba(120,96,70,0.12); }
-  .ck-total-label { font-family: "Poppins", sans-serif; font-weight: 700; font-size: 17px; color: #36281c; }
-  .ck-total-igv { font-family: "Space Mono", monospace; font-size: 10.5px; color: #a8957f; letter-spacing: 0.5px; }
-  .ck-total-amt { font-family: "Poppins", sans-serif; font-weight: 800; font-size: 26px; color: #c2691c; }
+  .ck-total-label { font-family: "Poppins", sans-serif; font-weight: 700; font-size: 16px; color: #36281c; }
+  .ck-total-igv { font-family: "Space Mono", monospace; font-size: 10px; color: #a8957f; letter-spacing: 0.5px; }
+  .ck-total-amt { font-family: "Poppins", sans-serif; font-weight: 800; font-size: 24px; color: #c2691c; }
 
   /* Form */
-  .ck-form { padding: 30px 34px 34px; }
+  .ck-form { padding: 30px 30px 34px; }
   .ck-h2 { font-family: "Poppins", sans-serif; font-weight: 700; font-size: 19px; color: #36281c; margin: 0 0 8px; letter-spacing: -0.2px; }
   .ck-form-note { font-size: 13.5px; line-height: 1.55; color: #8c7d6c; margin: 0 0 24px; max-width: 560px; }
   .ck-block { margin-bottom: 20px; }
@@ -336,14 +338,14 @@ const itemCount = productos.reduce((a, p) => a + p.cantidad, 0);
   .ck-comprobante { padding-top: 22px; border-top: 1px solid rgba(120,96,70,0.12); }
   .ck-obligatorio { font-family: "Space Mono", monospace; font-size: 11px; color: #b3a48f; margin-top: 14px; }
 
-  /* Payment footer */
-  .ck-foot { background: #ece4d7; border-top: 1px solid rgba(120,96,70,0.12); padding: 26px 34px 28px; }
-  .ck-foot-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 20px; }
-  .ck-foot-title { font-family: "Poppins", sans-serif; font-weight: 700; font-size: 16px; color: #36281c; }
-  .ck-foot-total { font-family: "Poppins", sans-serif; font-weight: 800; font-size: 18px; color: #c2691c; }
+  /* Payment column (previously footer) */
+  .ck-payment { padding: 30px 24px 32px; background: #efe7da; border-left: 1px solid rgba(120,96,70,0.12); }
+  .ck-foot-head { display: flex; flex-direction: column; gap: 4px; margin-bottom: 20px; }
+  .ck-foot-title { font-family: "Poppins", sans-serif; font-weight: 700; font-size: 15px; color: #36281c; }
+  .ck-foot-total { font-family: "Poppins", sans-serif; font-weight: 800; font-size: 24px; color: #c2691c; }
 
-  .ck-pay { display: flex; flex-wrap: wrap; align-items: stretch; gap: 18px; }
-  .ck-pay-methods { display: flex; flex-direction: column; gap: 10px; width: 210px; }
+  .ck-pay { display: flex; flex-direction: column; gap: 18px; }
+  .ck-pay-methods { display: flex; flex-direction: column; gap: 10px; width: 100%; }
   .ck-pay-method { all: unset; cursor: pointer; box-sizing: border-box; display: flex; align-items: center; gap: 11px; padding: 12px 14px; border-radius: 12px; background: transparent; border: 1.5px solid rgba(120,96,70,0.2); transition: background 160ms, border-color 160ms; }
   .ck-pay-method.is-active { background: #fff7ee; border-color: #cf6f1f; }
   .ck-radio { width: 22px; height: 22px; border-radius: 50%; border: 2px solid rgba(120,96,70,0.35); display: grid; place-items: center; transition: border-color 160ms; }
@@ -352,25 +354,26 @@ const itemCount = productos.reduce((a, p) => a + p.cantidad, 0);
   .ck-pay-method.is-active .ck-radio-dot { background: #cf6f1f; }
   .ck-pay-name { font-family: "Poppins", sans-serif; font-weight: 600; font-size: 14px; color: #36281c; }
 
-  .ck-info { flex: 1; min-width: 280px; display: flex; align-items: center; gap: 18px; background: #fbf8f2; border: 1px solid rgba(120,96,70,0.16); border-radius: 14px; padding: 16px 20px; }
+  .ck-info { width: 100%; display: flex; align-items: center; gap: 14px; background: #fbf8f2; border: 1px solid rgba(120,96,70,0.16); border-radius: 14px; padding: 14px 16px; }
   .ck-info-text { flex: 1; min-width: 0; }
   .ck-info-block { display: flex; flex-direction: column; gap: 4px; }
   .ck-info-block[hidden] { display: none; }
-  .ck-info-eyebrow { font-family: "Space Mono", monospace; font-size: 10.5px; letter-spacing: 1.5px; text-transform: uppercase; color: #a8957f; }
-  .ck-info-main { font-family: "Poppins", sans-serif; font-weight: 700; font-size: 19px; color: #36281c; letter-spacing: 0.5px; }
-  .ck-info-sub { font-size: 13px; color: #8c7d6c; }
-  .ck-qr { flex: none; width: 88px; height: 88px; border-radius: 10px; background: #fff; border: 1px solid rgba(120,96,70,0.16); display: grid; place-items: center; }
+  .ck-info-eyebrow { font-family: "Space Mono", monospace; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: #a8957f; }
+  .ck-info-main { font-family: "Poppins", sans-serif; font-weight: 700; font-size: 18px; color: #36281c; letter-spacing: 0.5px; }
+  .ck-info-sub { font-size: 12.5px; color: #8c7d6c; line-height: 1.3; }
+  .ck-qr { flex: none; width: 72px; height: 72px; border-radius: 10px; background: #fff; border: 1px solid rgba(120,96,70,0.16); display: grid; place-items: center; }
   .ck-qr[hidden] { display: none; }
 
-  .ck-actions { display: flex; flex-direction: column; gap: 10px; justify-content: center; min-width: 200px; }
+  .ck-actions { display: flex; flex-direction: column; gap: 10px; width: 100%; }
   .ck-attach { all: unset; cursor: pointer; box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center; gap: 9px; font-family: "Hanken Grotesk", sans-serif; font-weight: 600; font-size: 14px; color: #6f5e4c; background: #fbf8f2; border: 1.5px dashed rgba(120,96,70,0.35); padding: 11px 20px; border-radius: 12px; transition: border-color 160ms, color 160ms; }
   .ck-attach:hover { border-color: #cf6f1f; color: #cf6f1f; }
   .ck-buy { all: unset; cursor: pointer; box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center; gap: 10px; font-family: "Poppins", sans-serif; font-weight: 700; font-size: 15px; color: #fff7ec; background: #cf6f1f; padding: 14px 28px; border-radius: 12px; transition: background 180ms; }
   .ck-buy:hover { background: #b85f15; }
 
-  @media (max-width: 860px) {
+  @media (max-width: 990px) {
     .ck-body { grid-template-columns: 1fr; }
     .ck-cart { border-right: none; border-bottom: 1px solid rgba(120,96,70,0.12); }
+    .ck-payment { border-left: none; border-top: 1px solid rgba(120,96,70,0.12); }
   }
   @media (max-width: 560px) {
     .ck-grid-3, .ck-grid-2 { grid-template-columns: 1fr; }
