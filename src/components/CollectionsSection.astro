@@ -83,7 +83,7 @@ const {
                                             <span><strong class="font-bold text-white">Delivery gratis</strong> a distritos seleccionados</span>
                                         </li>
                                     </ul>
-                                    <button class="absolute -bottom-24 left-1/2 -translate-x-1/2 bg-[#DA7D01] text-white py-4 px-10 rounded-2xl font-semibold text-lg flex items-center justify-center gap-3 shadow-2xl hover:scale-105 transition-all active:scale-95 whitespace-nowrap z-50 cursor-pointer">
+                                    <button data-add-to-cart="promo" class="absolute -bottom-24 left-1/2 -translate-x-1/2 bg-[#DA7D01] text-white py-4 px-10 rounded-2xl font-semibold text-lg flex items-center justify-center gap-3 shadow-2xl hover:scale-105 transition-all active:scale-95 whitespace-nowrap z-50 cursor-pointer">
                                         <Image src={iconCompra} alt="" class="w-6 h-auto" />
                                         <span>Comprar Ahora</span>
                                     </button>
@@ -128,7 +128,7 @@ const {
                                             <span><strong class="font-bold text-white">Delivery gratis</strong> a distritos seleccionados</span>
                                         </li>
                                     </ul>
-                                    <button class="absolute -bottom-24 left-1/2 -translate-x-1/2 bg-[#DA7D01] text-white py-4 px-10 rounded-2xl font-semibold text-lg flex items-center justify-center gap-3 shadow-2xl hover:scale-105 transition-all active:scale-95 whitespace-nowrap z-50 cursor-pointer">
+                                    <button data-add-to-cart="unidad" class="absolute -bottom-24 left-1/2 -translate-x-1/2 bg-[#DA7D01] text-white py-4 px-10 rounded-2xl font-semibold text-lg flex items-center justify-center gap-3 shadow-2xl hover:scale-105 transition-all active:scale-95 whitespace-nowrap z-50 cursor-pointer">
                                         <Image src={iconCompra} alt="" class="w-6 h-auto" />
                                         <span>Comprar Ahora</span>
                                     </button>
@@ -154,7 +154,7 @@ const {
 
 <script>
     const sections = document.querySelectorAll('.collections-section');
-
+ 
     sections.forEach((section) => {
         const track = section.querySelector('.carousel-track') as HTMLElement;
         const nextBtn = section.querySelector('.next-slide');
@@ -162,7 +162,7 @@ const {
         const dots = section.querySelectorAll('.dot-btn');
         
         let currentIndex = 0;
-
+ 
         function updateCarousel() {
             if (track) track.style.transform = `translateX(-${currentIndex * 100}%)`;
             
@@ -177,27 +177,101 @@ const {
                 }
             });
         }
-
+ 
         if (nextBtn) {
             nextBtn.addEventListener('click', () => {
                 currentIndex = (currentIndex + 1) % 2;
                 updateCarousel();
             });
         }
-
+ 
         if (prevBtn) {
             prevBtn.addEventListener('click', () => {
                 currentIndex = (currentIndex - 1 + 2) % 2;
                 updateCarousel();
             });
         }
-
+ 
         dots.forEach((dot) => {
             dot.addEventListener('click', () => {
                 const index = parseInt(dot.getAttribute('data-index') || '0');
                 currentIndex = index;
                 updateCarousel();
             });
+        });
+    });
+
+    // Cart addition & fly animation logic
+    const buyBtns = document.querySelectorAll('[data-add-to-cart]');
+    buyBtns.forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const itemId = btn.getAttribute('data-add-to-cart');
+            if (!itemId) return;
+
+            // 1. Increment in localStorage
+            let cart: Record<string, number> = { promo: 1, unidad: 0 };
+            try {
+                const stored = localStorage.getItem("wasi-cart");
+                if (stored) cart = JSON.parse(stored);
+            } catch(err) {}
+            cart[itemId] = (cart[itemId] || 0) + 1;
+            localStorage.setItem("wasi-cart", JSON.stringify(cart));
+
+            // 2. Perform flying animation
+            // Find target (desktop or mobile navigation cart button)
+            const targetCart = window.innerWidth >= 1024
+                ? document.querySelector('.lg\\:flex a[href="/checkout"]')
+                : document.querySelector('.lg\\:hidden a[href="/checkout"]');
+
+            if (targetCart) {
+                const btnRect = btn.getBoundingClientRect();
+                const targetRect = targetCart.getBoundingClientRect();
+
+                // Create flyer element (a small styled orange dot)
+                const flyer = document.createElement('div');
+                flyer.style.position = 'fixed';
+                flyer.style.left = `${btnRect.left + btnRect.width / 2 - 15}px`;
+                flyer.style.top = `${btnRect.top + btnRect.height / 2 - 15}px`;
+                flyer.style.width = '30px';
+                flyer.style.height = '30px';
+                flyer.style.borderRadius = '50%';
+                flyer.style.backgroundColor = '#DA7D01';
+                flyer.style.boxShadow = '0 0 15px rgba(218, 125, 1, 0.7)';
+                flyer.style.zIndex = '99999';
+                flyer.style.pointerEvents = 'none';
+                flyer.style.transition = 'all 0.8s cubic-bezier(0.25, 1, 0.5, 1)';
+                document.body.appendChild(flyer);
+
+                // Force reflow
+                flyer.offsetWidth;
+
+                // Move flyer to target location and shrink
+                flyer.style.left = `${targetRect.left + targetRect.width / 2 - 10}px`;
+                flyer.style.top = `${targetRect.top + targetRect.height / 2 - 10}px`;
+                flyer.style.transform = 'scale(0.3)';
+                flyer.style.opacity = '0.4';
+
+                flyer.addEventListener('transitionend', () => {
+                    flyer.remove();
+                    // Update navigation badge
+                    if (typeof (window as any).updateNavBadge === 'function') {
+                        (window as any).updateNavBadge();
+                    }
+
+                    // Trigger pulse animation on badge
+                    const badge = targetCart.querySelector('.nav-cart-badge');
+                    if (badge) {
+                        badge.classList.add('pulse');
+                        setTimeout(() => badge.classList.remove('pulse'), 300);
+                    }
+                });
+            } else {
+                // If cart button not found, just update badge
+                if (typeof (window as any).updateNavBadge === 'function') {
+                    (window as any).updateNavBadge();
+                }
+            }
         });
     });
 </script>
