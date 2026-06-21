@@ -130,7 +130,7 @@ const {
         <button type="button" class="wb-legal-link" data-modal="pp"
           >Política de privacidad y cookies</button
         >
-        <button type="button" class="wb-legal-link" data-modal="lr"
+        <button type="button" class="wb-legal-link wb-legal-link--disabled"
           >Libro de reclamaciones</button
         >
       </nav>
@@ -690,6 +690,11 @@ const {
   }
   .wb-legal-link:hover {
     color: #e0a23a;
+  }
+  .wb-legal-link--disabled {
+    cursor: default;
+    pointer-events: none;
+    opacity: 0.5;
   }
   .wb-copy {
     font-family: "Hanken Grotesk", system-ui, sans-serif;
