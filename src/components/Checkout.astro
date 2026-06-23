@@ -274,9 +274,6 @@ const itemCount = productos.reduce((a, p) => a + p.cantidad, 0);
   <!-- Attach Receipt Modal -->
   <div class="ck-modal-overlay" id="receipt-modal" hidden>
     <div class="ck-modal-card">
-      <button type="button" class="ck-modal-close" id="close-receipt-modal" aria-label="Cerrar modal">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
-      </button>
       <div class="ck-modal-body">
         <div class="ck-modal-receipt-title">Adjuntar comprobante</div>
         <p class="ck-modal-receipt-sub">Sube una captura o PDF de tu pago por Yape, Plin o Transferencia BCP.</p>
@@ -290,7 +287,7 @@ const itemCount = productos.reduce((a, p) => a + p.cantidad, 0);
             <span class="ck-dropzone-formats">JPG, PNG o PDF</span>
           </div>
           <div class="ck-dropzone-filled" id="dropzone-filled" hidden>
-            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#2e7d32" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="ck-success-icon"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#cf6f1f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="ck-success-icon"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
             <span class="ck-file-name" id="attached-file-name">archivo.png</span>
             <button type="button" class="ck-remove-file-btn" id="remove-file-btn">Quitar comprobante</button>
           </div>
@@ -449,9 +446,9 @@ const itemCount = productos.reduce((a, p) => a + p.cantidad, 0);
   .ck-dropzone-text { font-family: "Hanken Grotesk", sans-serif; font-weight: 600; font-size: 13.5px; color: #6f5e4c; }
   .ck-dropzone-formats { font-size: 11px; color: #a8957f; }
   
-  .ck-file-name { font-family: "Hanken Grotesk", sans-serif; font-weight: 600; font-size: 14px; color: #2e7d32; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 260px; }
-  .ck-remove-file-btn { all: unset; cursor: pointer; font-family: "Hanken Grotesk", sans-serif; font-weight: 600; font-size: 12.5px; color: #cf2a2a; border-bottom: 1.5px dashed rgba(207, 42, 42, 0.35); padding-bottom: 1px; transition: border-color 160ms; }
-  .ck-remove-file-btn:hover { border-color: #cf2a2a; }
+  .ck-file-name { font-family: "Hanken Grotesk", sans-serif; font-weight: 600; font-size: 14px; color: #36281c; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 260px; }
+  .ck-remove-file-btn { all: unset; cursor: pointer; font-family: "Hanken Grotesk", sans-serif; font-weight: 600; font-size: 12.5px; color: #cf6f1f; border-bottom: 1.5px dashed rgba(207, 111, 31, 0.35); padding-bottom: 1px; transition: border-color 160ms, color 160ms; }
+  .ck-remove-file-btn:hover { color: #b85f15; border-color: #b85f15; }
   
   .ck-modal-actions { width: 100%; display: flex; gap: 10px; margin-top: 4px; }
   .ck-modal-btn { all: unset; cursor: pointer; box-sizing: border-box; flex: 1; text-align: center; font-family: "Poppins", sans-serif; font-weight: 700; font-size: 14px; padding: 10px 16px; border-radius: 10px; transition: background 160ms, border-color 160ms, color 160ms; }
@@ -487,8 +484,8 @@ const itemCount = productos.reduce((a, p) => a + p.cantidad, 0);
   .ck-actions { display: flex; flex-direction: column; gap: 8px; width: 100%; }
   .ck-attach { all: unset; cursor: pointer; box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center; gap: 9px; font-family: "Hanken Grotesk", sans-serif; font-weight: 600; font-size: 14px; color: #6f5e4c; background: #fbf8f2; border: 1.5px dashed rgba(120,96,70,0.35); padding: 9px 16px; border-radius: 12px; transition: border-color 160ms, color 160ms, background 160ms; }
   .ck-attach:hover { border-color: #cf6f1f; color: #cf6f1f; }
-  .ck-attach.is-attached { border-color: #2e7d32; color: #2e7d32; background: #e8f5e9; border-style: solid; }
-  .ck-attach.is-invalid { border-color: #cf2a2a !important; background: #fff3f3 !important; color: #cf2a2a !important; }
+  .ck-attach.is-attached { border-color: #cf6f1f; color: #cf6f1f; background: #fff7ee; border-style: solid; }
+  .ck-attach.is-invalid { border-color: #b9593c !important; background: #faf5f0 !important; color: #b9593c !important; }
   .ck-buy { all: unset; cursor: pointer; box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center; gap: 10px; font-family: "Poppins", sans-serif; font-weight: 700; font-size: 15px; color: #fff7ec; background: #cf6f1f; padding: 12px 22px; border-radius: 12px; transition: background 180ms; }
   .ck-buy:hover { background: #b85f15; }
 
@@ -501,7 +498,7 @@ const itemCount = productos.reduce((a, p) => a + p.cantidad, 0);
     .ck-grid-3, .ck-grid-2 { grid-template-columns: 1fr; }
   }
 
-  .ck-input.is-invalid, .ck-dd.is-invalid .ck-dd-trigger { border-color: #cf2a2a !important; background: #fff3f3 !important; }
+  .ck-input.is-invalid, .ck-dd.is-invalid .ck-dd-trigger { border-color: #b9593c !important; background: #faf5f0 !important; }
   
   .ck-toast {
     position: fixed;
