@@ -287,7 +287,7 @@ const itemCount = productos.reduce((a, p) => a + p.cantidad, 0);
             <span class="ck-dropzone-formats">JPG, PNG o PDF</span>
           </div>
           <div class="ck-dropzone-filled" id="dropzone-filled" hidden>
-            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#cf6f1f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="ck-success-icon"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#cf6f1f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="ck-file-icon"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
             <span class="ck-file-name" id="attached-file-name">archivo.png</span>
             <button type="button" class="ck-remove-file-btn" id="remove-file-btn">Quitar comprobante</button>
           </div>
@@ -997,7 +997,7 @@ const itemCount = productos.reduce((a, p) => a + p.cantidad, 0);
         
         // Update parent button state
         if (confirmedFile) {
-          if (attachText) attachText.textContent = `✓ Comprobante: ${confirmedFile.name}`;
+          if (attachText) attachText.textContent = `Comprobante: ${confirmedFile.name}`;
           attachBtn?.classList.add('is-attached');
           attachBtn?.classList.remove('is-invalid');
         } else {
