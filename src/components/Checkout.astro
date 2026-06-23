@@ -527,10 +527,10 @@ const itemCount = productos.reduce((a, p) => a + p.cantidad, 0);
   // ---- Configuración de EmailJS ----
   // Regístrate en https://www.emailjs.com/ para obtener tus credenciales gratuitas.
   const EMAILJS_CONFIG = {
-    PUBLIC_KEY: 'TU_PUBLIC_KEY',                 // Reemplazar con tu llave pública
-    SERVICE_ID: 'TU_SERVICE_ID',                 // Reemplazar con tu ID de servicio (ej: Gmail)
-    TEMPLATE_CLIENTE: 'TU_TEMPLATE_CLIENTE_ID',   // Reemplazar con la plantilla del cliente
-    TEMPLATE_EMPRESA: 'TU_TEMPLATE_EMPRESA_ID'    // Reemplazar con la plantilla de WasiBonsai
+    PUBLIC_KEY: import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY,
+    SERVICE_ID: import.meta.env.PUBLIC_EMAILJS_SERVICE_ID,
+    TEMPLATE_CLIENTE: import.meta.env.PUBLIC_EMAILJS_TEMPLATE_CLIENTE,
+    TEMPLATE_EMPRESA: import.meta.env.PUBLIC_EMAILJS_TEMPLATE_EMPRESA
   };
   // Ubigeo Perú — departamento → provincia → distritos.
   // Lima y Callao con distritos completos; demás departamentos con sus
