@@ -524,6 +524,14 @@ const itemCount = productos.reduce((a, p) => a + p.cantidad, 0);
 </style>
 
 <script>
+  // ---- Configuración de EmailJS ----
+  // Regístrate en https://www.emailjs.com/ para obtener tus credenciales gratuitas.
+  const EMAILJS_CONFIG = {
+    PUBLIC_KEY: 'TU_PUBLIC_KEY',                 // Reemplazar con tu llave pública
+    SERVICE_ID: 'TU_SERVICE_ID',                 // Reemplazar con tu ID de servicio (ej: Gmail)
+    TEMPLATE_CLIENTE: 'TU_TEMPLATE_CLIENTE_ID',   // Reemplazar con la plantilla del cliente
+    TEMPLATE_EMPRESA: 'TU_TEMPLATE_EMPRESA_ID'    // Reemplazar con la plantilla de WasiBonsai
+  };
   // Ubigeo Perú — departamento → provincia → distritos.
   // Lima y Callao con distritos completos; demás departamentos con sus
   // provincias y la capital provincial detallada. Ampliable a tu gusto.
@@ -1082,10 +1090,66 @@ const itemCount = productos.reduce((a, p) => a + p.cantidad, 0);
       window.open(url, '_blank');
     }
 
+    // Helper to read file as Base64 data URL
+    function fileToBase64(file: File): Promise<string> {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result as string);
+        reader.onerror = error => reject(error);
+      });
+    }
+
+    // Send emails using EmailJS REST API
+    async function sendEmails(params: any) {
+      if (!EMAILJS_CONFIG.PUBLIC_KEY || EMAILJS_CONFIG.PUBLIC_KEY === 'TU_PUBLIC_KEY') {
+        console.log('EmailJS no está configurado. Saltando envío de correos.');
+        return;
+      }
+
+      // 1. Enviar correo al cliente
+      if (EMAILJS_CONFIG.TEMPLATE_CLIENTE && EMAILJS_CONFIG.TEMPLATE_CLIENTE !== 'TU_TEMPLATE_CLIENTE_ID') {
+        try {
+          await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              service_id: EMAILJS_CONFIG.SERVICE_ID,
+              template_id: EMAILJS_CONFIG.TEMPLATE_CLIENTE,
+              user_id: EMAILJS_CONFIG.PUBLIC_KEY,
+              template_params: params
+            })
+          });
+          console.log('Correo de confirmación enviado al cliente con éxito.');
+        } catch (err) {
+          console.error('Error al enviar correo al cliente:', err);
+        }
+      }
+
+      // 2. Enviar correo a la empresa (alerta de venta)
+      if (EMAILJS_CONFIG.TEMPLATE_EMPRESA && EMAILJS_CONFIG.TEMPLATE_EMPRESA !== 'TU_TEMPLATE_EMPRESA_ID') {
+        try {
+          await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              service_id: EMAILJS_CONFIG.SERVICE_ID,
+              template_id: EMAILJS_CONFIG.TEMPLATE_EMPRESA,
+              user_id: EMAILJS_CONFIG.PUBLIC_KEY,
+              template_params: params
+            })
+          });
+          console.log('Correo de alerta enviado a la empresa con éxito.');
+        } catch (err) {
+          console.error('Error al enviar alerta a la empresa:', err);
+        }
+      }
+    }
+
     // ---- Submit Button Validation ----
     const buyBtn = root.querySelector('.ck-buy') as HTMLElement;
     if (buyBtn) {
-      buyBtn.addEventListener('click', (e) => {
+      buyBtn.addEventListener('click', async (e) => {
         e.preventDefault();
 
         // Reset previous validation borders
@@ -1201,7 +1265,40 @@ const itemCount = productos.reduce((a, p) => a + p.cantidad, 0);
           return;
         }
 
-        showToast('¡Validación correcta! Redirigiendo...', 'success');
+        showToast('Procesando pedido...', 'success');
+
+        // Compile email template parameters
+        let base64File = '';
+        try {
+          if (confirmedFile) {
+            base64File = await fileToBase64(confirmedFile);
+          }
+        } catch (err) {
+          console.error('Error al convertir comprobante a base64:', err);
+        }
+
+        const itemsText = Object.keys(state.qty)
+          .filter(id => state.qty[id] > 0)
+          .map(id => {
+            const name = id === 'promo' ? 'Promo 3x2' : 'Unidad Bonsai Pro';
+            return `- ${name}: ${state.qty[id]} u.`;
+          })
+          .join('\n');
+
+        const params = {
+          nombre: nombreInput.value.trim(),
+          dni: dniInput.value.trim(),
+          correo: correoInput.value.trim(),
+          celular: celularInput.value.trim(),
+          ubigeo: `${state.dep} → ${state.prov} → ${state.dist}`,
+          pedido: itemsText,
+          metodo_pago: state.pay === 'yape' ? 'Yape / Plin' : 'Transferencia BCP',
+          tipo_comprobante: state.doc === 'factura' ? 'Factura' : 'Boleta',
+          comprobante_datos: state.doc === 'factura'
+            ? `Razón Social: ${docNombreInput.value.trim()} | RUC: ${docIdInput.value.trim()}`
+            : `Nombre: ${docNombreInput.value.trim()} | DNI: ${docIdInput.value.trim()}`,
+          comprobante: base64File
+        };
 
         // Clear cart in state & localStorage
         state.qty = { promo: 0, unidad: 0 };
@@ -1214,10 +1311,11 @@ const itemCount = productos.reduce((a, p) => a + p.cantidad, 0);
           (window as any).updateNavBadge();
         }
 
-        setTimeout(() => {
+        // Trigger emails in background and redirect
+        sendEmails(params).then(() => {
           sendWhatsAppOrder();
           window.location.href = '/gracias';
-        }, 1200);
+        });
       });
     }
 
