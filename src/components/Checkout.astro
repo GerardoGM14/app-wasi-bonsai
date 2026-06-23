@@ -243,7 +243,6 @@ const itemCount = productos.reduce((a, p) => a + p.cantidad, 0);
 
           <!-- Actions -->
           <div class="ck-actions">
-            <input type="file" id="comprobante-file" accept="image/*,application/pdf" style="display: none;" />
             <button type="button" class="ck-attach" id="ck-attach-btn">
               <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
               <span id="ck-attach-text">Adjuntar comprobante</span>
@@ -269,6 +268,38 @@ const itemCount = productos.reduce((a, p) => a + p.cantidad, 0);
           <Image src={qrYape} alt="QR Yape Grande" class="ck-modal-qr-img" width={280} height={280} />
         </div>
         <p class="ck-modal-qr-help">Escanea el código QR desde tu app para pagar</p>
+      </div>
+    </div>
+  </div>
+  <!-- Attach Receipt Modal -->
+  <div class="ck-modal-overlay" id="receipt-modal" hidden>
+    <div class="ck-modal-card">
+      <button type="button" class="ck-modal-close" id="close-receipt-modal" aria-label="Cerrar modal">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+      <div class="ck-modal-body">
+        <div class="ck-modal-receipt-title">Adjuntar comprobante</div>
+        <p class="ck-modal-receipt-sub">Sube una captura o PDF de tu pago por Yape, Plin o Transferencia BCP.</p>
+        
+        <!-- Drag and drop zone -->
+        <div class="ck-dropzone" id="receipt-dropzone">
+          <input type="file" id="comprobante-file" accept="image/*,application/pdf" style="display: none;" />
+          <div class="ck-dropzone-empty" id="dropzone-empty">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#a8957f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="ck-upload-icon"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+            <span class="ck-dropzone-text">Selecciona o arrastra tu comprobante aquí</span>
+            <span class="ck-dropzone-formats">JPG, PNG o PDF</span>
+          </div>
+          <div class="ck-dropzone-filled" id="dropzone-filled" hidden>
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#2e7d32" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="ck-success-icon"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <span class="ck-file-name" id="attached-file-name">archivo.png</span>
+            <button type="button" class="ck-remove-file-btn" id="remove-file-btn">Quitar comprobante</button>
+          </div>
+        </div>
+        
+        <div class="ck-modal-actions">
+          <button type="button" class="ck-modal-btn ck-modal-btn-cancel" id="cancel-receipt-btn">Cancelar</button>
+          <button type="button" class="ck-modal-btn ck-modal-btn-confirm" id="confirm-receipt-btn">Confirmar</button>
+        </div>
       </div>
     </div>
   </div>
@@ -405,6 +436,29 @@ const itemCount = productos.reduce((a, p) => a + p.cantidad, 0);
   .ck-modal-qr-container { width: 280px; height: 280px; background: #ffffff; padding: 12px; border-radius: 16px; border: 1px solid rgba(120, 96, 70, 0.12); display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
   .ck-modal-qr-img { width: 100%; height: 100%; object-fit: contain; }
   .ck-modal-qr-help { font-size: 13px; color: #8c7d6c; margin: 0; }
+
+  /* Receipt Modal Styles */
+  .ck-modal-receipt-title { font-family: "Poppins", sans-serif; font-weight: 700; font-size: 18px; color: #36281c; margin-bottom: 8px; }
+  .ck-modal-receipt-sub { font-size: 13px; color: #8c7d6c; line-height: 1.45; margin: 0 0 18px; text-align: center; }
+  
+  .ck-dropzone { width: 100%; border: 2px dashed rgba(120, 96, 70, 0.25); border-radius: 12px; padding: 24px 16px; background: #fcfaf6; cursor: pointer; transition: border-color 160ms, background 160ms; display: flex; flex-direction: column; align-items: center; justify-content: center; margin-bottom: 20px; box-sizing: border-box; }
+  .ck-dropzone:hover, .ck-dropzone.is-dragover { border-color: #cf6f1f; background: #fbf6ee; }
+  
+  .ck-dropzone-empty, .ck-dropzone-filled { display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; width: 100%; }
+  .ck-upload-icon { margin-bottom: 4px; }
+  .ck-dropzone-text { font-family: "Hanken Grotesk", sans-serif; font-weight: 600; font-size: 13.5px; color: #6f5e4c; }
+  .ck-dropzone-formats { font-size: 11px; color: #a8957f; }
+  
+  .ck-file-name { font-family: "Hanken Grotesk", sans-serif; font-weight: 600; font-size: 14px; color: #2e7d32; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 260px; }
+  .ck-remove-file-btn { all: unset; cursor: pointer; font-family: "Hanken Grotesk", sans-serif; font-weight: 600; font-size: 12.5px; color: #cf2a2a; border-bottom: 1.5px dashed rgba(207, 42, 42, 0.35); padding-bottom: 1px; transition: border-color 160ms; }
+  .ck-remove-file-btn:hover { border-color: #cf2a2a; }
+  
+  .ck-modal-actions { width: 100%; display: flex; gap: 10px; margin-top: 4px; }
+  .ck-modal-btn { all: unset; cursor: pointer; box-sizing: border-box; flex: 1; text-align: center; font-family: "Poppins", sans-serif; font-weight: 700; font-size: 14px; padding: 10px 16px; border-radius: 10px; transition: background 160ms, border-color 160ms, color 160ms; }
+  .ck-modal-btn-cancel { background: #ece4d7; color: #6f5e4c; border: 1px solid rgba(120, 96, 70, 0.15); }
+  .ck-modal-btn-cancel:hover { background: #e3d8c6; }
+  .ck-modal-btn-confirm { background: #cf6f1f; color: #fff7ec; }
+  .ck-modal-btn-confirm:hover { background: #b85f15; }
 
   @keyframes ckFadeIn {
     from { opacity: 0; }
@@ -817,26 +871,144 @@ const itemCount = productos.reduce((a, p) => a + p.cantidad, 0);
       }
     });
 
-    // ---- Comprobante Attach File Handler ----
+    // ---- Comprobante Attach File Handler (Modal + Drag and Drop) ----
     const fileInput = root.querySelector('#comprobante-file') as HTMLInputElement;
     const attachBtn = root.querySelector('#ck-attach-btn') as HTMLButtonElement;
     const attachText = root.querySelector('#ck-attach-text') as HTMLElement;
+    
+    const receiptModal = root.querySelector('#receipt-modal') as HTMLElement;
+    const closeReceiptBtn = root.querySelector('#close-receipt-modal') as HTMLElement;
+    const cancelReceiptBtn = root.querySelector('#cancel-receipt-btn') as HTMLElement;
+    const confirmReceiptBtn = root.querySelector('#confirm-receipt-btn') as HTMLElement;
+    const dropzone = root.querySelector('#receipt-dropzone') as HTMLElement;
+    const dropzoneEmpty = root.querySelector('#dropzone-empty') as HTMLElement;
+    const dropzoneFilled = root.querySelector('#dropzone-filled') as HTMLElement;
+    const attachedFileName = root.querySelector('#attached-file-name') as HTMLElement;
+    const removeFileBtn = root.querySelector('#remove-file-btn') as HTMLElement;
 
-    if (fileInput && attachBtn && attachText) {
+    let confirmedFile: File | null = null;
+    let tempFile: File | null = null;
+
+    function syncModalUI() {
+      if (tempFile) {
+        if (dropzoneEmpty) dropzoneEmpty.hidden = true;
+        if (dropzoneFilled) dropzoneFilled.hidden = false;
+        if (attachedFileName) attachedFileName.textContent = tempFile.name;
+      } else {
+        if (dropzoneEmpty) dropzoneEmpty.hidden = false;
+        if (dropzoneFilled) dropzoneFilled.hidden = true;
+        if (attachedFileName) attachedFileName.textContent = '';
+      }
+    }
+
+    const closeReceiptModal = () => {
+      if (receiptModal) {
+        receiptModal.classList.add('is-closing');
+        setTimeout(() => {
+          receiptModal.hidden = true;
+          receiptModal.classList.remove('is-closing');
+        }, 200);
+      }
+    };
+
+    if (attachBtn && receiptModal) {
       attachBtn.addEventListener('click', () => {
+        tempFile = confirmedFile;
+        syncModalUI();
+        receiptModal.hidden = false;
+        receiptModal.classList.remove('is-closing');
+      });
+    }
+
+    if (closeReceiptBtn) {
+      closeReceiptBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        closeReceiptModal();
+      });
+    }
+
+    if (cancelReceiptBtn) {
+      cancelReceiptBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        closeReceiptModal();
+      });
+    }
+
+    if (receiptModal) {
+      receiptModal.addEventListener('click', (e) => {
+        if (e.target === receiptModal) {
+          closeReceiptModal();
+        }
+      });
+    }
+
+    if (dropzone && fileInput) {
+      dropzone.addEventListener('click', (e) => {
+        if (e.target === removeFileBtn) return;
         fileInput.click();
       });
 
-      fileInput.addEventListener('change', () => {
-        attachBtn.classList.remove('is-invalid');
-        if (fileInput.files && fileInput.files.length > 0) {
-          const file = fileInput.files[0];
-          attachText.textContent = `✓ Comprobante: ${file.name}`;
-          attachBtn.classList.add('is-attached');
-        } else {
-          attachText.textContent = 'Adjuntar comprobante';
-          attachBtn.classList.remove('is-attached');
+      // Drag and drop events
+      ['dragenter', 'dragover'].forEach(eventName => {
+        dropzone.addEventListener(eventName, (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          dropzone.classList.add('is-dragover');
+        }, false);
+      });
+
+      ['dragleave', 'drop'].forEach(eventName => {
+        dropzone.addEventListener(eventName, (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          dropzone.classList.remove('is-dragover');
+        }, false);
+      });
+
+      dropzone.addEventListener('drop', (e) => {
+        const dt = e.dataTransfer;
+        const files = dt?.files;
+        if (files && files.length > 0) {
+          tempFile = files[0];
+          syncModalUI();
         }
+      }, false);
+    }
+
+    if (fileInput) {
+      fileInput.addEventListener('change', () => {
+        if (fileInput.files && fileInput.files.length > 0) {
+          tempFile = fileInput.files[0];
+          syncModalUI();
+        }
+      });
+    }
+
+    if (removeFileBtn) {
+      removeFileBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        tempFile = null;
+        if (fileInput) fileInput.value = '';
+        syncModalUI();
+      });
+    }
+
+    if (confirmReceiptBtn) {
+      confirmReceiptBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        confirmedFile = tempFile;
+        
+        // Update parent button state
+        if (confirmedFile) {
+          if (attachText) attachText.textContent = `✓ Comprobante: ${confirmedFile.name}`;
+          attachBtn?.classList.add('is-attached');
+          attachBtn?.classList.remove('is-invalid');
+        } else {
+          if (attachText) attachText.textContent = 'Adjuntar comprobante';
+          attachBtn?.classList.remove('is-attached');
+        }
+        
+        closeReceiptModal();
       });
     }
 
@@ -1020,8 +1192,7 @@ const itemCount = productos.reduce((a, p) => a + p.cantidad, 0);
         }
 
         // 4. Validate payment proof attachment
-        const hasFile = fileInput && fileInput.files && fileInput.files.length > 0;
-        if (!hasFile) {
+        if (!confirmedFile) {
           attachBtn?.classList.add('is-invalid');
           if (isValid) {
             errMsg = 'Por favor, adjunta tu comprobante de pago.';
