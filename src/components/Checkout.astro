@@ -45,6 +45,11 @@ const {
 const money = (n: number) => "S/. " + n.toFixed(2);
 const subtotal = productos.reduce((a, p) => a + p.precio * p.cantidad, 0);
 const itemCount = productos.reduce((a, p) => a + p.cantidad, 0);
+
+const publicEmailjsKey = import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY || '';
+const serviceId = import.meta.env.PUBLIC_EMAILJS_SERVICE_ID || '';
+const templateCliente = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_CLIENTE || '';
+const templateEmpresa = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_EMPRESA || '';
 ---
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -54,7 +59,11 @@ const itemCount = productos.reduce((a, p) => a + p.cantidad, 0);
   rel="stylesheet"
 />
 
-<div class="ck-page">
+<div class="ck-page"
+     data-emailjs-public={publicEmailjsKey}
+     data-emailjs-service={serviceId}
+     data-emailjs-client={templateCliente}
+     data-emailjs-wasi={templateEmpresa}>
   <div class="ck-card">
     <!-- Header -->
     <div class="ck-header">
@@ -524,14 +533,6 @@ const itemCount = productos.reduce((a, p) => a + p.cantidad, 0);
 </style>
 
 <script>
-  // ---- Configuración de EmailJS ----
-  // Regístrate en https://www.emailjs.com/ para obtener tus credenciales gratuitas.
-  const EMAILJS_CONFIG = {
-    PUBLIC_KEY: import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY,
-    SERVICE_ID: import.meta.env.PUBLIC_EMAILJS_SERVICE_ID,
-    TEMPLATE_CLIENTE: import.meta.env.PUBLIC_EMAILJS_TEMPLATE_CLIENTE,
-    TEMPLATE_EMPRESA: import.meta.env.PUBLIC_EMAILJS_TEMPLATE_EMPRESA
-  };
   // Ubigeo Perú — departamento → provincia → distritos.
   // Lima y Callao con distritos completos; demás departamentos con sus
   // provincias y la capital provincial detallada. Ampliable a tu gusto.
@@ -576,6 +577,13 @@ const itemCount = productos.reduce((a, p) => a + p.cantidad, 0);
   }
 
   function initCheckout(root: HTMLElement) {
+    const EMAILJS_CONFIG = {
+      PUBLIC_KEY: root.dataset.emailjsPublic || '',
+      SERVICE_ID: root.dataset.emailjsService || '',
+      TEMPLATE_CLIENTE: root.dataset.emailjsClient || '',
+      TEMPLATE_EMPRESA: root.dataset.emailjsWasi || ''
+    };
+
     // precios desde el markup
     const prices: Record<string, number> = {};
     root.querySelectorAll('.ck-item').forEach((item) => {
