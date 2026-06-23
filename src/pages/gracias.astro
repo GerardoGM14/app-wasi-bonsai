@@ -1,0 +1,18 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navigation from "../components/Navigation.astro";
+import GraciasComponent from "../components/Gracias.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<Layout title="WasiBonsai | ¡Gracias por tu compra!">
+  <main class="min-h-screen bg-[#e7ddcf]">
+    <Navigation />
+    <GraciasComponent 
+      whatsappUrl="https://wa.me/qr/EKZ5LEEOUMBKL1"
+      instagramUrl="https://www.instagram.com/wasibonsai/?hl=es"
+      facebookUrl="https://www.facebook.com/wasibonsai/"
+    />
+    <Footer />
+  </main>
+</Layout>

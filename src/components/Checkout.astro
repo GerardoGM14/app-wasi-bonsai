@@ -243,9 +243,10 @@ const itemCount = productos.reduce((a, p) => a + p.cantidad, 0);
 
           <!-- Actions -->
           <div class="ck-actions">
-            <button type="button" class="ck-attach">
+            <input type="file" id="comprobante-file" accept="image/*,application/pdf" style="display: none;" />
+            <button type="button" class="ck-attach" id="ck-attach-btn">
               <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
-              Adjuntar comprobante
+              <span id="ck-attach-text">Adjuntar comprobante</span>
             </button>
             <button type="button" class="ck-buy">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
@@ -430,8 +431,10 @@ const itemCount = productos.reduce((a, p) => a + p.cantidad, 0);
   }
 
   .ck-actions { display: flex; flex-direction: column; gap: 8px; width: 100%; }
-  .ck-attach { all: unset; cursor: pointer; box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center; gap: 9px; font-family: "Hanken Grotesk", sans-serif; font-weight: 600; font-size: 14px; color: #6f5e4c; background: #fbf8f2; border: 1.5px dashed rgba(120,96,70,0.35); padding: 9px 16px; border-radius: 12px; transition: border-color 160ms, color 160ms; }
+  .ck-attach { all: unset; cursor: pointer; box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center; gap: 9px; font-family: "Hanken Grotesk", sans-serif; font-weight: 600; font-size: 14px; color: #6f5e4c; background: #fbf8f2; border: 1.5px dashed rgba(120,96,70,0.35); padding: 9px 16px; border-radius: 12px; transition: border-color 160ms, color 160ms, background 160ms; }
   .ck-attach:hover { border-color: #cf6f1f; color: #cf6f1f; }
+  .ck-attach.is-attached { border-color: #2e7d32; color: #2e7d32; background: #e8f5e9; border-style: solid; }
+  .ck-attach.is-invalid { border-color: #cf2a2a !important; background: #fff3f3 !important; color: #cf2a2a !important; }
   .ck-buy { all: unset; cursor: pointer; box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center; gap: 10px; font-family: "Poppins", sans-serif; font-weight: 700; font-size: 15px; color: #fff7ec; background: #cf6f1f; padding: 12px 22px; border-radius: 12px; transition: background 180ms; }
   .ck-buy:hover { background: #b85f15; }
 
@@ -814,6 +817,29 @@ const itemCount = productos.reduce((a, p) => a + p.cantidad, 0);
       }
     });
 
+    // ---- Comprobante Attach File Handler ----
+    const fileInput = root.querySelector('#comprobante-file') as HTMLInputElement;
+    const attachBtn = root.querySelector('#ck-attach-btn') as HTMLButtonElement;
+    const attachText = root.querySelector('#ck-attach-text') as HTMLElement;
+
+    if (fileInput && attachBtn && attachText) {
+      attachBtn.addEventListener('click', () => {
+        fileInput.click();
+      });
+
+      fileInput.addEventListener('change', () => {
+        attachBtn.classList.remove('is-invalid');
+        if (fileInput.files && fileInput.files.length > 0) {
+          const file = fileInput.files[0];
+          attachText.textContent = `✓ Comprobante: ${file.name}`;
+          attachBtn.classList.add('is-attached');
+        } else {
+          attachText.textContent = 'Adjuntar comprobante';
+          attachBtn.classList.remove('is-attached');
+        }
+      });
+    }
+
     // ---- Celular restriction: digits only, max 9, starts with 9 ----
     const celularInput = root.querySelector('[data-field="celular"]') as HTMLInputElement;
     if (celularInput) {
@@ -993,14 +1019,37 @@ const itemCount = productos.reduce((a, p) => a + p.cantidad, 0);
           }
         }
 
+        // 4. Validate payment proof attachment
+        const hasFile = fileInput && fileInput.files && fileInput.files.length > 0;
+        if (!hasFile) {
+          attachBtn?.classList.add('is-invalid');
+          if (isValid) {
+            errMsg = 'Por favor, adjunta tu comprobante de pago.';
+            isValid = false;
+          }
+        }
+
         if (!isValid) {
           showToast(errMsg, 'error');
           return;
         }
 
-        showToast('¡Validación correcta! Redirigiendo a WhatsApp...', 'success');
+        showToast('¡Validación correcta! Redirigiendo...', 'success');
+
+        // Clear cart in state & localStorage
+        state.qty = { promo: 0, unidad: 0 };
+        try {
+          localStorage.setItem('wasi-cart', JSON.stringify(state.qty));
+        } catch (err) {}
+
+        // Update nav badge
+        if (typeof (window as any).updateNavBadge === 'function') {
+          (window as any).updateNavBadge();
+        }
+
         setTimeout(() => {
           sendWhatsAppOrder();
+          window.location.href = '/gracias';
         }, 1200);
       });
     }
