@@ -1120,15 +1120,7 @@ const templateEmpresa = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_EMPRESA || '';
       window.open(url, '_blank');
     }
 
-    // Helper to read file as Base64 data URL
-    function fileToBase64(file: File): Promise<string> {
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => resolve(reader.result as string);
-        reader.onerror = error => reject(error);
-      });
-    }
+
 
     // Send emails using EmailJS REST API
     async function sendEmails(params: any) {
@@ -1307,16 +1299,6 @@ const templateEmpresa = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_EMPRESA || '';
 
         showToast('Procesando pedido...', 'success');
 
-        // Compile email template parameters
-        let base64File = '';
-        try {
-          if (confirmedFile) {
-            base64File = await fileToBase64(confirmedFile);
-          }
-        } catch (err) {
-          console.error('Error al convertir comprobante a base64:', err);
-        }
-
         // Generate dynamic order details
         const orderNumber = 'WB-' + Math.floor(100000 + Math.random() * 900000);
         const dateOptions: Intl.DateTimeFormatOptions = { day: '2-digit', month: 'long', year: 'numeric' };
@@ -1381,8 +1363,7 @@ const templateEmpresa = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_EMPRESA || '';
           pedido_whatsapp: `https://wa.me/51918574506`,
           pedido_instagram: `https://instagram.com/wasibonsai`,
           pedido_facebook: `https://facebook.com/wasibonsai`,
-          pedido_correo: correoInput.value.trim(),
-          comprobante: base64File
+          pedido_correo: correoInput.value.trim()
         };
 
         // Clear cart in state & localStorage
