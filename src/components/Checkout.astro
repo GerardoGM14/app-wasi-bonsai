@@ -681,6 +681,7 @@ const templateEmpresa = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_EMPRESA || '';
         root.querySelectorAll('[data-ship]').forEach((b) => b.classList.toggle('is-active', b === htmlBtn));
         const envio = root.querySelector('[data-envio]');
         if (envio) envio.textContent = state.ship === 'delivery' ? 'Gratis en Lima' : 'Por Shalom · por pagar';
+        onShipTypeChange();
       });
     });
 
@@ -754,6 +755,27 @@ const templateEmpresa = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_EMPRESA || '';
       else if (which === 'prov') { state.prov = value; state.dist = ''; }
       else { state.dist = value; }
       state.open = '';
+      renderDD();
+    }
+
+    function onShipTypeChange() {
+      if (state.ship === 'delivery') {
+        state.dep = 'Lima';
+        state.prov = 'Lima';
+        if (dds['dep']) dds['dep'].style.display = 'none';
+        if (dds['prov']) dds['prov'].style.display = 'none';
+        const grid = root.querySelector('.ck-grid-3') as HTMLElement;
+        if (grid) grid.style.gridTemplateColumns = '1fr';
+      } else {
+        if (state.dep === 'Lima' && state.prov === 'Lima' && !state.dist) {
+          state.dep = '';
+          state.prov = '';
+        }
+        if (dds['dep']) dds['dep'].style.display = 'block';
+        if (dds['prov']) dds['prov'].style.display = 'block';
+        const grid = root.querySelector('.ck-grid-3') as HTMLElement;
+        if (grid) grid.style.gridTemplateColumns = '';
+      }
       renderDD();
     }
 
@@ -1373,7 +1395,7 @@ const templateEmpresa = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_EMPRESA || '';
     }
 
     renderTotals();
-    renderDD();
+    onShipTypeChange();
   }
 
   document.querySelectorAll('.ck-page').forEach((el) => initCheckout(el as HTMLElement));
