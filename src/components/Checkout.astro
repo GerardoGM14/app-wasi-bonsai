@@ -1140,7 +1140,7 @@ const templateEmpresa = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_EMPRESA || '';
       // 1. Enviar correo al cliente
       if (EMAILJS_CONFIG.TEMPLATE_CLIENTE && EMAILJS_CONFIG.TEMPLATE_CLIENTE !== 'TU_TEMPLATE_CLIENTE_ID') {
         try {
-          await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+          const res = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -1150,16 +1150,21 @@ const templateEmpresa = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_EMPRESA || '';
               template_params: params
             })
           });
-          console.log('Correo de confirmación enviado al cliente con éxito.');
+          if (res.ok) {
+            console.log('Correo de confirmación enviado al cliente con éxito.');
+          } else {
+            const errText = await res.text();
+            console.error('Error de EmailJS al enviar al cliente:', res.status, errText);
+          }
         } catch (err) {
-          console.error('Error al enviar correo al cliente:', err);
+          console.error('Error de red al enviar correo al cliente:', err);
         }
       }
 
       // 2. Enviar correo a la empresa (alerta de venta)
       if (EMAILJS_CONFIG.TEMPLATE_EMPRESA && EMAILJS_CONFIG.TEMPLATE_EMPRESA !== 'TU_TEMPLATE_EMPRESA_ID') {
         try {
-          await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+          const res = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -1169,9 +1174,14 @@ const templateEmpresa = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_EMPRESA || '';
               template_params: params
             })
           });
-          console.log('Correo de alerta enviado a la empresa con éxito.');
+          if (res.ok) {
+            console.log('Correo de alerta enviado a la empresa con éxito.');
+          } else {
+            const errText = await res.text();
+            console.error('Error de EmailJS al enviar a la empresa:', res.status, errText);
+          }
         } catch (err) {
-          console.error('Error al enviar alerta a la empresa:', err);
+          console.error('Error de red al enviar alerta a la empresa:', err);
         }
       }
     }
