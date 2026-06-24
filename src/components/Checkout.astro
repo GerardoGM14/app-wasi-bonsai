@@ -1337,9 +1337,15 @@ const templateEmpresa = import.meta.env.PUBLIC_EMAILJS_TEMPLATE_EMPRESA || '';
           pedido_igv: igvVal.toFixed(2),
           pedido_total: totalAmt.toFixed(2),
           pedido_entrega_nombre: nombreInput.value.trim(),
+          pedido_entrega_celular: celularInput.value.trim(),
+          pedido_entrega_dni: dniInput.value.trim(),
           pedido_entrega_distrito: state.dist,
           pedido_entrega_provincia: state.prov,
           pedido_entrega_departamento: state.dep,
+          pedido_comprobante_tipo: state.doc === 'factura' ? 'Factura' : 'Boleta',
+          pedido_comprobante_datos: state.doc === 'factura'
+            ? `Razón Social: ${docNombreInput.value.trim()} | RUC: ${docIdInput.value.trim()}`
+            : `Nombre: ${docNombreInput.value.trim()} | DNI: ${docIdInput.value.trim()}`,
           pedido_whatsapp: `https://wa.me/51918574506`,
           pedido_instagram: `https://instagram.com/wasibonsai`,
           pedido_facebook: `https://facebook.com/wasibonsai`,
