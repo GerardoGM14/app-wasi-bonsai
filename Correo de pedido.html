@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="x-apple-disable-message-reformatting" />
+  <title>Gracias por tu pedido · Wasi Bonsai</title>
+  <!--[if mso]>
+  <noscript><xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch></o:OfficeDocumentSettings></xml></noscript>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Hanken+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    /* Solo refuerzos — todo lo crítico va en estilos en línea para compatibilidad */
+    body { margin: 0; padding: 0; width: 100% !important; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+    table { border-collapse: collapse !important; }
+    img { border: 0; line-height: 100%; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; }
+    a { text-decoration: none; }
+    .wb-link:hover { border-bottom-color: #cf6f1f !important; }
+    .wb-social:hover { background-color: #cf6f1f !important; }
+    @media only screen and (max-width: 600px) {
+      .wb-container { width: 100% !important; }
+      .wb-pad { padding-left: 22px !important; padding-right: 22px !important; }
+      .wb-h1 { font-size: 26px !important; }
+    }
+  </style>
+</head>
+<body style="margin:0; padding:0; background-color:#e7ddcf;">
+
+  <!-- Preheader (oculto) -->
+  <div style="display:none; max-height:0; overflow:hidden; opacity:0; mso-hide:all; font-size:1px; line-height:1px; color:#e7ddcf;">
+    Recibimos tu pedido — te escribiremos por WhatsApp para coordinar la entrega.
+  </div>
+
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#e7ddcf;">
+    <tr>
+      <td align="center" style="padding:32px 16px;">
+
+        <!-- Tarjeta -->
+        <table role="presentation" class="wb-container" width="600" cellpadding="0" cellspacing="0" style="width:600px; max-width:600px; background-color:#f3ede3; border:1px solid #e0d5c4; border-radius:16px; overflow:hidden;">
+
+          <!-- Header -->
+          <tr>
+            <td style="background-color:#ece4d7; border-top:5px solid #cf6f1f; padding:22px 32px;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td style="vertical-align:middle; width:50px;">
+                    <img src="https://wasi-bonsai.web.app/email-assets/favicon-wasibonsai.ico" alt="Wasi Bonsai" width="44" height="44" style="display:block; width:44px; height:44px;" />
+                  </td>
+                  <td style="vertical-align:middle; padding-left:14px;">
+                    <div style="font-family:'Poppins','Segoe UI',Arial,sans-serif; font-weight:800; font-size:16px; letter-spacing:1.5px; color:#36281c;">WASI BONSAI</div>
+                    <div style="font-family:'Hanken Grotesk','Segoe UI',Arial,sans-serif; font-size:11px; letter-spacing:0.2px; color:#a8957f; padding-top:2px;">Pre-bonsáis y material de trabajo</div>
+                  </td>
+                  <td align="right" style="vertical-align:middle;">
+                    <span style="font-family:'Hanken Grotesk','Segoe UI',Arial,sans-serif; font-weight:600; font-size:11px; letter-spacing:0.8px; text-transform:uppercase; color:#cf6f1f;">Pedido recibido</span>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Saludo -->
+          <tr>
+            <td class="wb-pad" style="padding:36px 34px 0 34px;">
+              <h1 class="wb-h1" style="margin:0 0 12px 0; font-family:'Poppins','Segoe UI',Arial,sans-serif; font-weight:700; font-size:30px; line-height:1.15; letter-spacing:-0.5px; color:#a0691c;">¡Gracias por tu pedido!</h1>
+              <p style="margin:0; font-family:'Hanken Grotesk','Segoe UI',Arial,sans-serif; font-size:15.5px; line-height:1.6; color:#897a6a;">
+                Recibimos tu pedido correctamente. Te escribiremos por WhatsApp para confirmar tu comprobante de pago y coordinar la entrega.
+              </p>
+            </td>
+          </tr>
+
+          <!-- N.° de pedido -->
+          <tr>
+            <td class="wb-pad" style="padding:26px 34px 0 34px;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-bottom:2px solid #36281c;">
+                <tr>
+                  <td style="padding-bottom:8px; font-family:'Hanken Grotesk','Segoe UI',Arial,sans-serif; font-weight:700; font-size:14.5px; color:#36281c;">
+                    Pedido N.° {{pedido_numero}}
+                  </td>
+                  <td align="right" style="padding-bottom:8px; font-family:'Space Mono',monospace; font-size:12px; color:#a8957f;">
+                    {{pedido_fecha}}
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Items -->
+          <tr>
+            <td class="wb-pad" style="padding:0 34px;">
+              {{{pedido_items_html}}}
+            </td>
+          </tr>
+
+          <!-- Divisor -->
+          <tr>
+            <td class="wb-pad" style="padding:24px 34px;">
+              <div style="border-top:2px solid #e0d5c4; font-size:0; line-height:0;">&nbsp;</div>
+            </td>
+          </tr>
+
+          <!-- Totales -->
+          <tr>
+            <td class="wb-pad" style="padding:0 34px 8px 34px;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="font-family:'Hanken Grotesk','Segoe UI',Arial,sans-serif;">
+                <tr>
+                  <td style="width:55%;"></td>
+                  <td style="padding:6px 8px; font-size:14.5px; color:#7a6a58;">Subtotal</td>
+                  <td align="right" style="padding:6px 0; font-size:14.5px; color:#4a3a2a; white-space:nowrap;">S/. {{pedido_subtotal}}</td>
+                </tr>
+                <tr>
+                  <td style="width:55%;"></td>
+                  <td style="padding:6px 8px; font-size:14.5px; color:#7a6a58;">Envío</td>
+                  <td align="right" style="padding:6px 0; font-size:14.5px; color:#4a3a2a; white-space:nowrap;">{{pedido_envio}}</td>
+                </tr>
+                <tr>
+                  <td style="width:55%;"></td>
+                  <td style="padding:6px 8px; font-size:14.5px; color:#7a6a58;">IGV (18%)</td>
+                  <td align="right" style="padding:6px 0; font-size:14.5px; color:#4a3a2a; white-space:nowrap;">S/. {{pedido_igv}}</td>
+                </tr>
+                <tr>
+                  <td style="width:55%;"></td>
+                  <td style="padding:16px 8px; border-top:2px solid #36281c; vertical-align:middle;">
+                    <strong style="font-family:'Poppins','Segoe UI',Arial,sans-serif; font-weight:700; font-size:16px; color:#36281c; white-space:nowrap;">Total</strong>
+                  </td>
+                  <td align="right" style="padding:16px 0; border-top:2px solid #36281c; vertical-align:middle; white-space:nowrap;">
+                    <strong style="font-family:'Poppins','Segoe UI',Arial,sans-serif; font-weight:800; font-size:20px; color:#c2691c;">S/. {{pedido_total}}</strong>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Entrega -->
+          <tr>
+            <td class="wb-pad" style="padding:8px 34px 4px 34px;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#ece4d7; border-radius:12px;">
+                <tr>
+                  <td style="padding:18px 20px;">
+                    <div style="font-family:'Hanken Grotesk','Segoe UI',Arial,sans-serif; font-weight:600; font-size:11px; letter-spacing:0.8px; text-transform:uppercase; color:#a8957f; padding-bottom:6px;">Entrega</div>
+                    <div style="font-family:'Hanken Grotesk','Segoe UI',Arial,sans-serif; font-size:14.5px; line-height:1.5; color:#5d4836;">
+                      {{pedido_entrega_nombre}}<br />
+                      Dirección: A coordinar por WhatsApp<br />
+                      {{pedido_entrega_distrito}}, {{pedido_entrega_provincia}} — {{pedido_entrega_departamento}}
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- CTA WhatsApp -->
+          <tr>
+            <td class="wb-pad" align="center" style="padding:26px 34px 36px 34px;">
+              <!--[if mso]>
+              <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="{{pedido_whatsapp}}" style="height:46px;v-text-anchor:middle;width:280px;" arcsize="26%" stroke="f" fillcolor="#cf6f1f">
+              <w:anchorlock/><center style="color:#fff7ec;font-family:sans-serif;font-size:15px;font-weight:bold;">Escríbenos por WhatsApp</center>
+              </v:roundrect>
+              <![endif]-->
+              <!--[if !mso]><!-->
+              <a href="{{pedido_whatsapp}}" target="_blank" style="display:inline-block; font-family:'Poppins','Segoe UI',Arial,sans-serif; font-weight:700; font-size:15px; color:#fff7ec; background-color:#cf6f1f; padding:14px 30px; border-radius:12px;">Escríbenos por WhatsApp</a>
+              <!--<![endif]-->
+            </td>
+          </tr>
+
+        </table>
+
+        <!-- Footer -->
+        <table role="presentation" class="wb-container" width="600" cellpadding="0" cellspacing="0" style="width:600px; max-width:600px;">
+          <tr>
+            <td class="wb-pad" align="center" style="padding:24px 34px 8px 34px;">
+              <table role="presentation" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td style="padding:0 7px;">
+                    <a class="wb-social" href="{{pedido_instagram}}" target="_blank" style="display:inline-block; width:40px; height:40px; line-height:40px; text-align:center; border-radius:50%; background-color:#9a571c;">
+                      <img src="https://wasi-bonsai.web.app/email-assets/icon-instagram.svg" alt="Instagram" width="20" height="20" style="vertical-align:middle;" />
+                    </a>
+                  </td>
+                  <td style="padding:0 7px;">
+                    <a class="wb-social" href="{{pedido_facebook}}" target="_blank" style="display:inline-block; width:40px; height:40px; line-height:40px; text-align:center; border-radius:50%; background-color:#9a571c;">
+                      <img src="https://wasi-bonsai.web.app/email-assets/icon-facebook.svg" alt="Facebook" width="20" height="20" style="vertical-align:middle;" />
+                    </a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td class="wb-pad" align="center" style="padding:14px 34px 32px 34px;">
+              <p style="margin:0; font-family:'Hanken Grotesk','Segoe UI',Arial,sans-serif; font-size:12.5px; line-height:1.6; color:#a8957f;">
+                Este correo fue enviado a {{pedido_correo}}<br />
+                Lo recibiste porque realizaste un pedido en Wasi Bonsai.
+              </p>
+              <p style="margin:12px 0 0 0; font-family:'Space Mono',monospace; font-size:11px; color:#b3a48f;">
+                © 2026 · WasiBonsai · Todos los derechos reservados
+              </p>
+            </td>
+          </tr>
+        </table>
+
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
